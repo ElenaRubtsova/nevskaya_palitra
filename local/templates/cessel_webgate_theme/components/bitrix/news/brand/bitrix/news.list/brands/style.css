@@ -1,0 +1,23 @@
+/* new styles */
+.card-image {
+	display: block;
+	position: relative;
+	height: 270px;
+	z-index: 2;
+	overflow: hidden;
+	background-position: center;
+	background-size: cover;
+}
+.card-body {
+	position: relative;
+	width: 100%;
+	padding: 30px 20px 30px;
+	z-index: 3;
+	text-align: center;
+}
+.card-body a {
+	text-decoration: revert;
+	font-size: 1.2em;
+	line-height: 1.4em;
+}
+/* /new styles */
