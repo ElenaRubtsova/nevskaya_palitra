@@ -112,7 +112,7 @@ $icons_color[] = 'bg-green';
 				<?if (is_array($arResult["PROPERTIES"]["features_image"])){?>
 					<div class="index-catalog observables fade-down">
 						<div class="row">
-							<?// ar_print($arResult["PROPERTIES"]["features_image"]); ?>
+							<?//print_r($arResult["PROPERTIES"]["FEATURES"]['VALUE']); ?>
 							<?$i = 0;?>
 							<?foreach($arResult["PROPERTIES"]["features_image"]['VALUE'] as $featur){?>
 							<div class="col-3to12">
@@ -123,7 +123,7 @@ $icons_color[] = 'bg-green';
 											<img class="loaded" src="<?=$path_feat;?>">
 										</div>
 										<div class="card-body">
-											<h3><?echo $arResult["PROPERTIES"]["features_image"]["DESCRIPTION"][$i];?></h3>
+											<h3><?echo $arResult["PROPERTIES"]["FEATURES"]["VALUE"][$i];?></h3>
 										</div>
 									</div>
 								</div>
@@ -135,6 +135,7 @@ $icons_color[] = 'bg-green';
 						</div>
 					</div>
 				<?}?>
+
 				<div class="txt_detail">
 					<?echo $arResult["DETAIL_TEXT"];?>
 				</div>
@@ -142,7 +143,7 @@ $icons_color[] = 'bg-green';
 				<div class="section-benefits observables">
 					<h2><?=$arResult['PROPERTIES']['TITLE_DESC']['VALUE'];?></h2>
                     <div class="row">
-                        <?//ar_print($arResult['PROPERTIES']['TITLE_DESC']);
+                        <?//print_r($arResult['PROPERTIES']['TITLE_DESC']);
                         $i = 0;
                         foreach ($arResult['PROPERTIES']['pluses_image']['VALUE'] as $index => $plus) {
                             $icon_image = '';
@@ -155,7 +156,7 @@ $icons_color[] = 'bg-green';
 						
                                         <? } ?>
                                     </div>
-                                    <h3><?=$arResult['PROPERTIES']['pluses_image']['DESCRIPTION'][$index]; ?></h3>
+                                    <h3><?=$arResult["PROPERTIES"]["pluses"]["VALUE"][$index];?></h3>
                                 </div>
                             </div>
                             <? $i++;
@@ -165,11 +166,13 @@ $icons_color[] = 'bg-green';
 				
 				<div class="section-palettes">
 					<?if( $arResult['PROPERTIES']['DOWNLOAD_PALETTE']){?>
-					<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;">Выкраски</h2>
+					<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;">Color examples</h2>
 					<?}?>
 					
 					<div class="row">
-						<? 
+						<?
+                        //print_r($arResult['PROPERTIES']['DOWNLOAD_PALETTE']['VALUE']);
+                        //print_r($arResult['PROPERTIES']['DOWNLOAD_PALETTE_NAMES']['VALUE']);
 							$files_id = $arResult['PROPERTIES']['DOWNLOAD_PALETTE']['VALUE'];
 							$files_names = $arResult['PROPERTIES']['DOWNLOAD_PALETTE']['DESCRIPTION'];
 							foreach($files_id as $index=>$file_id) {
@@ -178,34 +181,30 @@ $icons_color[] = 'bg-green';
 									?>
 										<div class="col-6to12">
 											<div class="badge badge-hollow">
-												<a href="<? echo $file_link?>" class="btn btn-small bg-green badge-download">
+												<a href="<?=$file_link?>" class="btn btn-small bg-green badge-download">
 													<svg width="20" height="35">
 														<use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
 													</svg>
 												</a>
-												<h3 class="badge-title"><? echo $files_names[$index];?></h3>
-												
+												<h3 class="badge-title"><?=$arResult['PROPERTIES']['DOWNLOAD_PALETTE_NAMES']['VALUE'][$index];?></h3>
 											</div>
 										</div> 
 									<?
 								}
-								
 							}                        
 						?>
 					</div>
                 </div>
-				<?if( $arResult['PROPERTIES']['INSTRUCTIONS'] ){?>
-					
-							
+				<?if( $arResult['PROPERTIES']['INSTRUCTIONS']) { ?>
 					<div class="section-palettes">
-						<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;">Инструкции</h2>
+						<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;">Instructions</h2>
 						<div class="row">
 							<? 
 								//$files_id = $item['INSTRUCTIONS']['VALUE'];
 								//$files_names = $item['INSTRUCTIONS']['DESCRIPTION'];
 								foreach($arResult['PROPERTIES']['INSTRUCTIONS']['VALUE'] as $index=>$val) {
 									$file_link = CFile::GetPath($val);
-									$file_name = $arResult['PROPERTIES']['INSTRUCTIONS']['DESCRIPTION'][$index];
+									$file_name = 'File '.($index+1);//$arResult['PROPERTIES']['INSTRUCTIONS']['DESCRIPTION'][$index];
 									if (!empty($file_link)) {
 										?>
 											<div class="col-6to12">
@@ -316,9 +315,6 @@ $icons_color[] = 'bg-green';
 	<?if($arParams["DISPLAY_DATE"]!="N" && $arResult["DISPLAY_ACTIVE_FROM"]):?>
 		<div class="news-detail-date"><?echo $arResult["DISPLAY_ACTIVE_FROM"]?></div>
 	<?endif?>
-
-
-
 	</div>
 </div>
 <script type="text/javascript">

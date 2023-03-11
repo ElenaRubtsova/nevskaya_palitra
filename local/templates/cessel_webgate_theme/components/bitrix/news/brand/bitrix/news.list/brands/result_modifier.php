@@ -21,8 +21,9 @@ $dbres = CIBlockSection::GetList(
     ),
     false
 );
+$arResult['ALL_CATEGORIES'] = array();
 while($ob = $dbres->Fetch()) {
-    $arResult['ALL_CATEGORIES'][] = $ob;
+    $arResult['ALL_CATEGORIES'][$ob['ID']] = $ob['NAME'];
 }
 //}
 

@@ -240,3 +240,6 @@
 	flex: 0 0 33.3333%;
 	max-width: 33.3333%;
 }
+.txt_anons, .txt_detail {
+	padding: 15px 0px;
+}
