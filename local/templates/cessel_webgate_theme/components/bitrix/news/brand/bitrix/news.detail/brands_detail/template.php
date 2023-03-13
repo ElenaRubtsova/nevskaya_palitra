@@ -14,8 +14,7 @@ $this->setFrameMode(true);
 $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_THEME'] : '';
 CUtil::InitJSCore(['fx', 'ui.fonts.opensans']);
 ?>
-<?//print_r($arParams['MY_PARAMETER']);
-//ar_print($arResult);
+<?//ar_print($arResult);
 $banner = CFile::GetPath($arResult["PROPERTIES"]["CATALOG_BANNER"]["VALUE"]);
 //echo $banner;
 $icons_color[] = 'bg-red';
