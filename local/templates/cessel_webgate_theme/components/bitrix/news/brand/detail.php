@@ -72,9 +72,10 @@ $this->setFrameMode(true);
 		"SLIDER_PROPERTY" => $arParams["SLIDER_PROPERTY"],
 		"TEMPLATE_THEME" => $arParams["TEMPLATE_THEME"],
 		"STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
+        "MY_PARAMETER" => '123',
 	),
 	$component
-);?>
+);?>            <!--Вернуться-->
 <p><a href="<?=$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"]?>"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a></p>
 <?if($arParams["USE_CATEGORIES"]=="Y" && $ElementID):
 	global $arCategoryFilter;

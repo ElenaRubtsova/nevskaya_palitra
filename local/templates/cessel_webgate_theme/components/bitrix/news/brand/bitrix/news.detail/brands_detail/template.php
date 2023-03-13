@@ -14,7 +14,8 @@ $this->setFrameMode(true);
 $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_THEME'] : '';
 CUtil::InitJSCore(['fx', 'ui.fonts.opensans']);
 ?>
-<?//ar_print($arResult);
+<?//print_r($arParams['MY_PARAMETER']);
+//ar_print($arResult);
 $banner = CFile::GetPath($arResult["PROPERTIES"]["CATALOG_BANNER"]["VALUE"]);
 //echo $banner;
 $icons_color[] = 'bg-red';
@@ -166,7 +167,7 @@ $icons_color[] = 'bg-green';
 				
 				<div class="section-palettes">
 					<?if( $arResult['PROPERTIES']['DOWNLOAD_PALETTE']){?>
-					<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;">Color examples</h2>
+					<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("PALETTE_TITLE")?></h2>
 					<?}?>
 					
 					<div class="row">
@@ -197,7 +198,7 @@ $icons_color[] = 'bg-green';
                 </div>
 				<?if( $arResult['PROPERTIES']['INSTRUCTIONS']) { ?>
 					<div class="section-palettes">
-						<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;">Instructions</h2>
+						<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("INSTRUCTIONS_TITLE")?></h2>
 						<div class="row">
 							<? 
 								//$files_id = $item['INSTRUCTIONS']['VALUE'];
@@ -219,7 +220,6 @@ $icons_color[] = 'bg-green';
 											</div> 
 										<?
 									}
-									
 								}                        
 							?>
 						</div>
