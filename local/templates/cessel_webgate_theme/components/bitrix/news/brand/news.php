@@ -82,8 +82,9 @@ $this->setFrameMode(true);
 
 		"PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
 		"ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
-		"SET_TITLE" => $arParams["SET_TITLE"],
+		"SET_TITLE" => 'N',
 		"SET_BROWSER_TITLE" => "Y",
+        "TITLE" => GetMessage("BROWSER_TITLE"),
 		"SET_META_KEYWORDS" => "Y",
 		"SET_META_DESCRIPTION" => "Y",
 		"MESSAGE_404" => $arParams["MESSAGE_404"],

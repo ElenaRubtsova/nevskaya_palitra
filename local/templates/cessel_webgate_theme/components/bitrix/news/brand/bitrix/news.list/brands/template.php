@@ -10,6 +10,8 @@
 /** @var string $templateFolder */
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
+if ($arParams["SET_BROWSER_TITLE"] === 'Y')
+    $APPLICATION->SetTitle($arParams['TITLE']);
 $this->setFrameMode(true);
 ?>
 <section class="page-section">
@@ -17,7 +19,7 @@ $this->setFrameMode(true);
         <div class="section-inner">
 
             <div class="section-title about-title">
-                <h1>Brands</h1>
+                <h1><?=$arParams['TITLE']?></h1>
             </div>
 
             <div class="index-catalog observables fade-down">
