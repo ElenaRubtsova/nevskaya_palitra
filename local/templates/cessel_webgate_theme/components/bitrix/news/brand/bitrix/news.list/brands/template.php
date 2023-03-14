@@ -12,29 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<style>
-    .card-image {
-        display: block;
-        position: relative;
-        height: 270px;
-        z-index: 2;
-        overflow: hidden;
-        background-position: center;
-        background-size: cover;
-    }
-    .card-body {
-        position: relative;
-        width: 100%;
-        padding: 30px 20px 30px;
-        z-index: 3;
-        text-align: center;
-    }
-    .card-body a {
-        text-decoration: revert;
-        font-size: 1.2em;
-        line-height: 1.4em;
-    }
-</style>
 <section class="page-section">
     <div class="container">
         <div class="section-inner">
@@ -48,6 +25,7 @@ $this->setFrameMode(true);
 
 				<?foreach($arResult["ITEMS"] as $arItem):?>
 					<?
+                //print_r($arItem['CATEGORIES']);
 						$this->AddEditAction(
 							$arItem['ID'],
 							$arItem['EDIT_LINK'],
@@ -77,9 +55,9 @@ $this->setFrameMode(true);
 
                                 <div class="card-body">
                                     <h3><a href="<?echo $arItem["DETAIL_PAGE_URL"]?>" style="text-decoration: none;"><?=$arItem['NAME']?></a></h3>
-                                    <? foreach ($arItem['PROPERTIES']['CATEGORY_BRAND']['VALUE'] as $id) { ?>
-                                        <a href="/catalog2022/paints/acrylic/master-class/" style="text-decoration: revert;" data-caption="<?=$arItem['NAME']?>">
-                                            <?echo($arResult['ALL_CATEGORIES'][$id]);?>
+                                    <? foreach ($arItem['CATEGORIES'] as $cat) { ?>
+                                        <a href="<?echo($cat['SECTION_URL']);?>" style="text-decoration: revert;" data-caption="<?=$arItem['NAME']?>">
+                                            <?echo($cat['NAME_SECTION']);?>
                                         </a><br>
                                     <? } ?>
                                 </div>

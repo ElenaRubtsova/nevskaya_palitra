@@ -8,22 +8,60 @@
 
 /*CATEGORIES_OF_BRAND*/
 //if($arParams["OUT_CATEGORIES_OF_BRAND"] {
-$dbres = CIBlockSection::GetList(
-    array(),
-    array(
-        'IBLOCK_ID' => 27
-        //ID разделов
-    ),
-    false,
-    array(
-        'ID',
-        'NAME'
-    ),
-    false
-);
-$arResult['ALL_CATEGORIES'] = array();
-while($ob = $dbres->Fetch()) {
-    $arResult['ALL_CATEGORIES'][$ob['ID']] = $ob['NAME'];
+$categories = array();
+//print_r($arResult["ITEMS"][0]['NAME']);
+//print_r($arResult["ITEMS"][1]['NAME']);
+foreach ($arResult["ITEMS"] as &$brand) {
+    $categories = array();
+    // 1 запрос - собираю в массив ссылки и айдишники родительских разделов с name = brand['name']
+    $dbres = CIBlockSection::GetList(
+        array(),
+        array(
+            'IBLOCK_ID' => 71,
+            'NAME' => htmlspecialchars_decode($brand['NAME']),
+        ),
+        false,
+        array(
+            'IBLOCK_SECTION_ID',
+            'SECTION_PAGE_URL',
+        ),
+        false
+    );
+    $parentIds = array();
+    while ($ob = $dbres->GetNext()) {
+        $categories[] = array('SECTION_URL' => $ob['SECTION_PAGE_URL']);
+        $parentIds[] = $ob['IBLOCK_SECTION_ID'];
+    }
+    /*if ($brand['NAME'] == "I'm an Artist! | Start") {
+        echo '1';
+        print_r($categories);
+        print_r($parentIds);
+        echo (isset($parentIds[0]));
+    }*/
+    if (isset($parentIds[0])) {
+        // 2 запрос - получаю name родительских разделов
+        $names = array();
+        $dbres = CIBlockSection::GetList(
+            array(),
+            array(
+                'IBLOCK_ID' => 71,
+                'ID' => $parentIds,
+                'ACTIVE' => 'Y',
+            ),
+            false,
+            array(
+                'NAME',
+            ),
+            false
+        );
+        $i = 0;
+        while ($ob = $dbres->GetNext()) {
+            $categories[$i] = array_merge($categories[$i], array('NAME_SECTION' => $ob['NAME']));
+            $i++;
+        }
+        //print_r($categories[$brand['NAME']]);
+        $brand['CATEGORIES'] = $categories;
+    }
 }
 //}
 
