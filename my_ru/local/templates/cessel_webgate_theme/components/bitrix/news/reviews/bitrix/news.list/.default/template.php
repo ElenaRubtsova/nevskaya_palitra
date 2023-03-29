@@ -10,20 +10,7 @@
 /** @var string $templateFolder */
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
-$this->setFrameMode(true);
-function pp($arr) {
-    global $USER;
-    if ($USER->isAdmin()) {
-        echo '<pre>'; print_r($arr); echo '</pre>';
-    }
-}
-//pp($arResult);
-$paged = isset($_REQUEST["PAGEN_15"]) ? intval($_REQUEST["PAGEN_15"]) : 1;//test
-pp($paged);
-$nextPaged = $paged + 1;
-pp($nextPaged);
-$loockedCount = ($paged - 1) * intval($arParams["NEWS_COUNT"]) + intval($arParams["NEWS_COUNT"]); 
-?>
+$this->setFrameMode(true);?>
 
 <div class="page-main">
 	<section id="reviews-section-title" class="page-section club-intro">

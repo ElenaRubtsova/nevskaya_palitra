@@ -4,7 +4,7 @@ $(document).ready(function () {
     $(document).on('click', '#load_more_reviews', function (e) {
         i++;
         var url = '/reviews/?PAGEN_1=' + i,
-            rewcount = parseInt(document.querySelector('.rew-count').innerHTML),
+            rewcount = document.querySelectorAll('.the-review').length,
             maxcount = parseInt(document.querySelector('.max-count').innerHTML),
             containerID = '#reviews-list',
             container = $(containerID).find('> .row'),
@@ -14,14 +14,16 @@ $(document).ready(function () {
         $.post(url, function (response) {
             var reviews = $(response).find('#reviews-list .the-review');
             var pagination = $(response).find('#reviews-list .load_more_wrapper');
-            $(container).append(reviews);
 
             rewcount += $(reviews).length;
             if (rewcount <= maxcount) {
-                //document.querySelector('.rew-count').innerHTML = rewcount;
-                if ((rewcount + $(reviews).length) <= maxcount) {
-                    $(containerID).append(pagination);
-                }
+
+                $(container).append(reviews);
+                $(containerID).append(pagination);
+                document.querySelector('.rew-count').innerHTML = rewcount.toString();
+
+                if (rewcount == maxcount)
+                    document.getElementById('load_more_reviews').disabled = true;
             }
 
             var images = document.querySelectorAll('.olazy');
@@ -36,8 +38,6 @@ $(document).ready(function () {
                     }
                 }
             });
-            console.log(container);
-            console.log(pagination);
         });
     });
 });
