@@ -11,8 +11,17 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-$paged = isset($_REQUEST["PAGEN_15"]) ? intval($_REQUEST["PAGEN_15"]) : 1;
+function pp($arr) {
+    global $USER;
+    if ($USER->isAdmin()) {
+        echo '<pre>'; print_r($arr); echo '</pre>';
+    }
+}
+//pp($arResult);
+$paged = isset($_REQUEST["PAGEN_15"]) ? intval($_REQUEST["PAGEN_15"]) : 1;//test
+pp($paged);
 $nextPaged = $paged + 1;
+pp($nextPaged);
 $loockedCount = ($paged - 1) * intval($arParams["NEWS_COUNT"]) + intval($arParams["NEWS_COUNT"]); 
 ?>
 
@@ -66,24 +75,23 @@ $loockedCount = ($paged - 1) * intval($arParams["NEWS_COUNT"]) + intval($arParam
 		                        </div>
 		                    </div>
 						<?endforeach;?>
-	                </div>
-	                <? 
-					
-					//d($arResult);
-					
-					if ($arResult["ITEMS"] && count($arResult["ITEMS"]) && $loockedCount < intval($arResult["NAV_RESULT"]->NavRecordCount)) : ?>
+                    </div>
+	                <? $rewCount = '<span class="rew-count">'. count($arResult["ITEMS"]) . '</span>';
+                    $maxNumber = intval($arResult["NAV_RESULT"]->NavRecordCount);
+                    $maxCount = '<span class="max-count">'. $maxNumber . '</span>';
+
+					if ($arResult["ITEMS"] && count($arResult["ITEMS"])) : ?>
 		                <div class="section-bottom load_more_wrapper">
 		                    <span class="news-count"><?=sprintf(
-		                    	'%s %d %s %d %s',
+		                    	'%s %s %s %s %s',
 		                    	GetMessage('YOU_LOOKED'),
-		                    	$loockedCount,
+                                $rewCount,
 		                    	GetMessage('FROM'),
-		                    	$arResult["NAV_RESULT"]->NavRecordCount,
+                                $maxCount,
 		                    	GetMessage('REVIEWS_LC')
 	                    	); ?></span>
 		                    <button id="load_more_reviews" 
-		                    		class="btn btn-wide bg-red centered" 
-		                    		data-url="<?=sky_localized_url('/reviews/?PAGEN_15=' . $nextPaged);?>">
+		                    		class="btn btn-wide bg-red centered">
 		                    	<span><?=GetMessage('LOAD_MORE'); ?></span>
 		                    </button>
 		                </div>
