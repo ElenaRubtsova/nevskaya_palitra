@@ -144,3 +144,30 @@ if ($sliderProperty)
 	}
 }
 
+/*REVIEWS OF BRAND*/
+if (is_array($arResult["PROPERTIES"]["REVIEWS"]["VALUE"])) {
+    //$arResult["REVIEWS"] = true;
+
+    $rews = array();
+    $dbres = CIBlockElement::GetList(
+        array(),
+        array(
+            'IBLOCK_ID' => 36,
+            'ID' => $arResult["PROPERTIES"]["REVIEWS"]["VALUE"],
+        ),
+        false,
+        false,
+        array(
+            'NAME',
+            'PREVIEW_PICTURE',
+            'PREVIEW_TEXT',
+            //'DETAIL_PICTURE',
+            'DETAIL_TEXT'
+        )
+    );
+    while ($ob = $dbres->GetNext()) {
+        $rews[] = $ob;
+    }
+
+    $arResult["REVIEWS"] = $rews;
+}

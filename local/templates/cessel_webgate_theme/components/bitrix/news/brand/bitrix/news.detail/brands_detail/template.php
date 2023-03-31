@@ -25,27 +25,17 @@ $icons_color[] = 'bg-green';
 	<div class="page-section" id="<?echo $this->GetEditAreaId($arResult['ID'])?>">
 
 		<?if($arParams["DISPLAY_PICTURE"]!="N"):?>
-			<? if ($arResult["VIDEO"])
-			{
-				?>
+			<?if ($arResult["VIDEO"]) {?>
 				<div class="mb-5 news-detail-youtube embed-responsive embed-responsive-16by9" style="display: block;">
 					<iframe src="<?
 					echo $arResult["VIDEO"] ?>" frameborder="0" allowfullscreen=""></iframe>
 				</div>
-				<?
-			}
-			else if ($arResult["SOUND_CLOUD"])
-			{
-				?>
+				<?} else if ($arResult["SOUND_CLOUD"]) {?>
 				<div class="mb-5 news-detail-audio">
 					<iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=<?
 					echo urlencode($arResult["SOUND_CLOUD"]) ?>&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
 				</div>
-				<?
-			}
-			else if ($arResult["SLIDER"] && count($arResult["SLIDER"]) > 1)
-			{
-				?>
+				<?} else if ($arResult["SLIDER"] && count($arResult["SLIDER"]) > 1) {?>
 				<div class="mb-5 news-detail-slider">
 					<div class="news-detail-slider-container" style="width: <? echo count($arResult["SLIDER"]) * 100 ?>%;left: 0%;">
 						<? foreach ($arResult["SLIDER"] as $file):?>
@@ -68,11 +58,7 @@ $icons_color[] = 'bg-green';
 						<? endforeach ?>
 					</ul>
 				</div>
-				<?
-			}
-			else if ($arResult["SLIDER"])
-			{
-				?>
+				<?} else if ($arResult["SLIDER"]) {?>
 				<div class="mb-5 news-detail-img">
 					<img
 						class="card-img-top"
@@ -81,11 +67,7 @@ $icons_color[] = 'bg-green';
 						title="<?= $arResult["SLIDER"][0]["TITLE"] ?>"
 					/>
 				</div>
-				<?
-			}
-			else if (is_array($arResult["DETAIL_PICTURE"]))
-			{
-				?>
+				<?} else if (is_array($arResult["DETAIL_PICTURE"])) {?>
 				<div class="mb-5 news-detail-img">
 					<img
 						class="card-img-top"
@@ -94,9 +76,7 @@ $icons_color[] = 'bg-green';
 						title="<?=$arResult["DETAIL_PICTURE"]["TITLE"]?>"
 						/>
 				</div>
-				<?
-			}
-			?>
+				<?}?>
 		<?endif?>
 
 		<div class="container">
@@ -225,10 +205,20 @@ $icons_color[] = 'bg-green';
 					</div>
 				<?}?>
 			</div>
+
+            <?/*$APPLICATION->IncludeComponent(
+                "custom:reviews",
+                "brand_detail",
+                Array(
+                    "ITEMS" => $arResult["REVIEWS"],
+                    "COUNT_ON_PAGE" => 2
+                )
+            );*/?>
             <?$APPLICATION->IncludeComponent(
                 "bitrix:news.list",
                 "reviews",
                 Array(
+                    "REVIEWS_ID" => $arResult["PROPERTIES"]["REVIEWS"]["VALUE"],
                     "ACTIVE_DATE_FORMAT" => "d.m.Y",
                     "ADD_SECTIONS_CHAIN" => "Y",
                     "AJAX_MODE" => "N",
@@ -253,9 +243,9 @@ $icons_color[] = 'bg-green';
                     "FIELD_CODE" => array("",""),
                     "FILTER_NAME" => "",
                     "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-                    "IBLOCK_ID" => "36",
-                    "IBLOCK_TYPE" => "testimonials",
-                    "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+                    //"IBLOCK_ID" => "36",
+                    //"IBLOCK_TYPE" => "testimonials",
+                    //"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
                     "INCLUDE_SUBSECTIONS" => "Y",
                     "MESSAGE_404" => "",
                     "NEWS_COUNT" => "2",

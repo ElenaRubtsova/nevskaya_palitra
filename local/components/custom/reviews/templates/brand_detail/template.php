@@ -11,17 +11,7 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 //$this->setFrameMode(true);
-function pp($arr)
-{
-    global $USER;
-    if ($USER->isAdmin()) {
-        echo('<pre>');
-        print_r($arr);
-        echo('</pre>');
-    }
-}
-
-//if($USER->isAdmin()) {echo('<pre>');print_r($arResult["REVIEWS"]);echo('</pre>');}
+if($USER->isAdmin()) {echo('<pre>');print_r($arResult["ITEMS"]);echo('</pre>');}
 ?>
 
 <div class="page-main">
@@ -38,8 +28,7 @@ function pp($arr)
 	    <div class="container">
 	        <div class="section-inner">
 	            <div id="reviews-list" class="reviews-list filter-result">
-                    <!--all rews-->
-                    <!--<div class="row">
+	                <div class="row">
 						<? foreach($arResult["ITEMS"] as $arItem ) : ?>
 							<? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 							$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
@@ -74,49 +63,9 @@ function pp($arr)
 		                        </div>
 		                    </div>
 						<?endforeach;?>
-                    </div>-->
-                    <!--rews of brands-->
-
-                    <div class="row">
-                        <? foreach($arResult["REVIEWS"] as $arItem ) : ?>
-                            <? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-                            $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
-                            <div id="review-<?=$this->GetEditAreaId($arItem['ID']);?>" class="the-review col-6to12">
-                                <div class="reviews-slider-item reviews-item w-100">
-                                    <?
-                                    //pp(CFile::GetPath($arItem["PREVIEW_PICTURE"]));
-                                    if ($arItem["PREVIEW_PICTURE"] != 0)
-                                        $SRC = CFile::GetPath($arItem["PREVIEW_PICTURE"]);
-                                    else
-                                        $SRC = "/local/templates/cessel_webgate_theme/images/intro_logo.svg";
-                                    $ALT = $arItem["NAME"];
-                                    ?>
-                                    <div class="slider-item-image">
-                                        <img class="olazy"
-                                             data-src="<?=$SRC; ?>"
-                                             alt="<?=$ALT; ?>"/>
-                                    </div>
-                                    <div class="slider-item-body">
-                                        <? if ($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arItem["PREVIEW_TEXT"]) : ?>
-                                            <p><?=$arItem["PREVIEW_TEXT"]; ?></p>
-                                        <? endif ?>
-                                        <h3>
-                                            <?=sprintf(
-                                                "%s %s %s",
-                                                (!$arParams["HIDE_LINK_WHEN_NO_DETAIL"]) || ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"]) ? '<a href="' . sky_localized_url($arItem["DETAIL_PAGE_URL"]) . '">' : '',
-                                                $arItem["NAME"],
-                                                (!$arParams["HIDE_LINK_WHEN_NO_DETAIL"]) || ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"]) ? '</a>' : ''
-                                            );?>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                        <?endforeach;?>
                     </div>
-
-	                <? //pp($arResult["ITEMS"]);
-                    $rewCount = '<span class="rew-count">'. count($arResult["ITEMS"]) . '</span>';
-                    $maxNumber = count($arResult["ITEMS"]);
+	                <? $rewCount = '<span class="rew-count">'. count($arResult["ITEMS"]) . '</span>';
+                    $maxNumber = intval($arResult["NAV_RESULT"]->NavRecordCount);
                     $maxCount = '<span class="max-count">'. $maxNumber . '</span>';
 
 					if ($arResult["ITEMS"] && count($arResult["ITEMS"])) : ?>
