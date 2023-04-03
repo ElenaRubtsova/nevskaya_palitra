@@ -1,0 +1,45 @@
+.page-main {}
+.page-section {}
+.section-bottom-reviews {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.overlay {
+    position: fixed;
+    z-index: 5;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.6); /* затемнение фона */
+    display: none;
+}
+.overlay.active {
+    display: block;
+}
+.overlay .flex-popup {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay .flex-popup .popup {
+    position: relative;
+    background-color: #fff;  /* цвет фона всплывающего блока */
+    padding: 35px 25px;
+    margin: 0 10px;
+    max-width: 450px;
+    overflow: auto;
+}
+.popup span {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.popup img {
+    padding: 5px 5px;
+}

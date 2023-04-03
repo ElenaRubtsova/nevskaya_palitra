@@ -1,3 +1,17 @@
+function show_popup(item) {
+    let popup = $(".popup");
+    console.log(item);
+    $("#review").addClass('active');
+    document.querySelector('.photo').src = item['IMAGE'];
+    document.querySelector('.photo').alt = item['NAME'];
+    document.querySelector('.title').innerHTML = item['NAME'];
+    document.querySelector('.description').innerHTML = item['TEXT'];
+
+    //popup.getElementById('description').innerHTML = 't3';
+}
+function close_popup() {
+    $(".overlay.active").removeClass("active");
+}
 $(document).ready(function () {
     var i = 1;
 
@@ -9,7 +23,6 @@ $(document).ready(function () {
             containerID = '#reviews-list',
             container = $(containerID).find('> .row'),
             pagination = $('#reviews-list .load_more_wrapper');
-        console.log(url);
 
         $(pagination).remove();
         $.post(url, function (response) {

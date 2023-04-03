@@ -206,6 +206,9 @@ $icons_color[] = 'bg-green';
 				<?}?>
 			</div>
 
+            <div class="section-palettes">
+                <h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("REVIEWS_TITLE")?></h2>
+                <div class="row">
             <?/*$APPLICATION->IncludeComponent(
                 "custom:reviews",
                 "brand_detail",
@@ -243,9 +246,6 @@ $icons_color[] = 'bg-green';
                     "FIELD_CODE" => array("",""),
                     "FILTER_NAME" => "",
                     "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-                    //"IBLOCK_ID" => "36",
-                    //"IBLOCK_TYPE" => "testimonials",
-                    //"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
                     "INCLUDE_SUBSECTIONS" => "Y",
                     "MESSAGE_404" => "",
                     "NEWS_COUNT" => "2",
@@ -274,6 +274,9 @@ $icons_color[] = 'bg-green';
                     "STRICT_SECTION_CHECK" => "N"
                 )
             );?>
+                </div>
+            </div>
+
 			<div class="section-bottom justify-center flexed">
 			<?//ar_print($arResult);?>
 				<a href="<?=sky_localized_url('/katalog/brand/brand-is-' . $arResult["CODE"].'/apply/'); ?>" class="btn btn-wide bg-green">
