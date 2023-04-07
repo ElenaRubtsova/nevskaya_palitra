@@ -5,5 +5,6 @@ $MESS["REVIEWS"] = "reviews";
 $MESS["REVIEWS_LC"] = "reviews";
 $MESS["FROM"] = "out of";
 $MESS["LOAD_MORE"] = "Load more";
+$MESS["SHOW_MORE"] = "Show more";
 $MESS["YOU_HAVE_LOOCKED"] = "Вы посмотрели %d из %d товаров";
 ?>

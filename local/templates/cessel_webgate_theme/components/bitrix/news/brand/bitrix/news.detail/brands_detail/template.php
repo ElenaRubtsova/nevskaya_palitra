@@ -222,6 +222,7 @@ $icons_color[] = 'bg-green';
                 "reviews",
                 Array(
                     "REVIEWS_ID" => $arResult["PROPERTIES"]["REVIEWS"]["VALUE"],
+                    "COUNT_IN_LIST" => 6,
                     "ACTIVE_DATE_FORMAT" => "d.m.Y",
                     "ADD_SECTIONS_CHAIN" => "Y",
                     "AJAX_MODE" => "N",

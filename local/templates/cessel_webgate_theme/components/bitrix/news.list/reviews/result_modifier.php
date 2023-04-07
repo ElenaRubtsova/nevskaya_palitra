@@ -1,7 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true){die();}
 
 if (is_array($arParams["REVIEWS_ID"])) {
-//$arResult["REVIEWS"] = true;
     $rews = array();
     $dbres = CIBlockElement::GetList(
         array(),
@@ -15,7 +14,6 @@ if (is_array($arParams["REVIEWS_ID"])) {
             'NAME',
             'PREVIEW_PICTURE',
             'PREVIEW_TEXT',
-//'DETAIL_PICTURE',
             'DETAIL_TEXT',
         )
     );
@@ -24,3 +22,4 @@ if (is_array($arParams["REVIEWS_ID"])) {
     }
     $arResult["ITEMS"] = $rews;
 }
+?>
