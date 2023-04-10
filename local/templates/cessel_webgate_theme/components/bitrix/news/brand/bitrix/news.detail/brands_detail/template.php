@@ -284,6 +284,16 @@ $icons_color[] = 'bg-green';
 					<span><?=GetMessage("BRAND_SEE_CATALOG")?></span>
 				</a>
 			</div>
+
+            <?//if($USER->isAdmin()) {echo('<pre>');print_r($arResult["PROPERTIES"]['PICTURES']['VALUE']);echo('</pre>');}?>
+            <?$APPLICATION->IncludeComponent(
+                "custom:gallery",
+                "brand_detail",
+                Array(
+                    "PICTURE_IDS" => $arResult["PROPERTIES"]['PICTURES']['VALUE']
+                )
+            );?>
+
 		</div>
 
 		<?if(($arParams["USE_RATING"]=="Y") && ($arParams["USE_SHARE"] == "Y")) {?> <div class="d-flex justify-content-between"> <? } ?>
