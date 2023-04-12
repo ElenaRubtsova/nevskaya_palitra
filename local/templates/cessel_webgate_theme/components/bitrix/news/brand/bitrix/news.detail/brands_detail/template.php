@@ -286,6 +286,77 @@ $icons_color[] = 'bg-green';
 			</div>
 
             <?//if($USER->isAdmin()) {echo('<pre>');print_r($arResult["PROPERTIES"]['PICTURES']['VALUE']);echo('</pre>');}?>
+
+            <div class="container">
+                <div class="section-inner">
+                    <div class="about-slider-wrapper">
+                        <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"></button>
+                        <div class="about-slider slick-initialized slick-slider">
+
+                            <div class="slick-list draggable">
+                                <div class="slick-track"
+                                     style="opacity: 1; width: 21080px; transform: translate3d(-8680px, 0px, 0px);">
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/2a5/about_10.jpg"></div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="0" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/43f/0S1A4735.jpg"></div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="1" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/da4/0S1A1747.JPG"></div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="2" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/9ec/0S1A6321.jpg"></div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="3" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/cbf/0S1A2757.jpg"></div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="4" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/478/about_3.jpg"></div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="5" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/6d3/0S1A4740.jpg"></div>
+                                    <div class="about-slider-item slick-slide slick-current slick-active" data-slick-index="6"
+                                         aria-hidden="false" style="width: 1240px;" tabindex="0"><img alt="" class=""
+                                                                                                      style="opacity: 1;"
+                                                                                                      src="/upload/iblock/3ea/about_6.jpg">
+                                    </div>
+                                    <div class="about-slider-item slick-slide" data-slick-index="7" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/2a5/about_10.jpg"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="8" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/43f/0S1A4735.jpg"
+                                                                                   alt="" class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="9" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/da4/0S1A1747.JPG"
+                                                                                   alt="" class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="10" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/9ec/0S1A6321.jpg"
+                                                                                   alt="" class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="11" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/cbf/0S1A2757.jpg"
+                                                                                   alt="" class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="12" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/478/about_3.jpg" alt=""
+                                                                                   class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="13" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/6d3/0S1A4740.jpg"
+                                                                                   alt="" class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="14" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/3ea/about_6.jpg" alt=""
+                                                                                   class="slick-loading"></div>
+                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="15" aria-hidden="true"
+                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
+                                                                                   src="/upload/iblock/2a5/about_10.jpg"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"></button>
+                    </div>
+                </div>
+            </div>
             <?$APPLICATION->IncludeComponent(
                 "custom:gallery",
                 "brand_detail",
