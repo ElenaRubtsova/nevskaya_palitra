@@ -246,6 +246,20 @@
 /*--
 --- Галерея изображений - слайдер (картинки)
 --*/
+.about-slider-wrapper {
+	padding: 15px 0px;
+}
+.slider-item {
+	padding: 15px 0px;
+	text-align: center;
+}
+.slider-item img {
+	height: 100%;
+	width: 100%;
+	border-radius: 25px;
+	/*height: 800px;
+	width: 1200px;*/
+}
 /* Выцветание анимации */
 .fade {
 	-webkit-animation-name: fade;

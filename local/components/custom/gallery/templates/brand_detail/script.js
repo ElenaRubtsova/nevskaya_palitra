@@ -17,21 +17,6 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
 }
 
-/*const aboutSlider = $('.about-slider'); // <== Кешируем слайдер
-
-aboutSlider.сlick({
-    arrows: false,
-    dots: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    lazyLoad: 'ondemand'
-})
-
-$('.slider-btn').click(function() {
-    const dir = $(this).data('dir');
-    aboutSlider.slick('slick'+dir);
-})*/
-
 var slideIndex = 1;
 $(document).ready(function () {
     showSlides(slideIndex);

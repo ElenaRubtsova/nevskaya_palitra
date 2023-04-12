@@ -5,7 +5,7 @@ if ($arParams["PICTURE_IDS"] != '') {
     foreach ($arParams["PICTURE_IDS"] as $id) {
         $arResult["ITEMS"][] = CFile::ResizeImageGet(
             $id,
-            array("width"=> 1200, "height"=> 800),
+            array("width"=> 1500, "height"=> 800),
             BX_RESIZE_IMAGE_PROPORTIONAL_ALT,
             false
         );

@@ -285,143 +285,19 @@ $icons_color[] = 'bg-green';
 				</a>
 			</div>
 
-            <?//if($USER->isAdmin()) {echo('<pre>');print_r($arResult["PROPERTIES"]['PICTURES']['VALUE']);echo('</pre>');}?>
-
-            <div class="container">
-                <div class="section-inner">
-                    <div class="about-slider-wrapper">
-                        <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"></button>
-                        <div class="about-slider slick-initialized slick-slider">
-
-                            <div class="slick-list draggable">
-                                <div class="slick-track"
-                                     style="opacity: 1; width: 21080px; transform: translate3d(-8680px, 0px, 0px);">
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/2a5/about_10.jpg"></div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="0" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/43f/0S1A4735.jpg"></div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="1" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/da4/0S1A1747.JPG"></div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="2" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/9ec/0S1A6321.jpg"></div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="3" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/cbf/0S1A2757.jpg"></div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="4" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/478/about_3.jpg"></div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="5" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/6d3/0S1A4740.jpg"></div>
-                                    <div class="about-slider-item slick-slide slick-current slick-active" data-slick-index="6"
-                                         aria-hidden="false" style="width: 1240px;" tabindex="0"><img alt="" class=""
-                                                                                                      style="opacity: 1;"
-                                                                                                      src="/upload/iblock/3ea/about_6.jpg">
-                                    </div>
-                                    <div class="about-slider-item slick-slide" data-slick-index="7" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/2a5/about_10.jpg"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="8" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/43f/0S1A4735.jpg"
-                                                                                   alt="" class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="9" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/da4/0S1A1747.JPG"
-                                                                                   alt="" class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="10" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/9ec/0S1A6321.jpg"
-                                                                                   alt="" class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="11" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/cbf/0S1A2757.jpg"
-                                                                                   alt="" class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="12" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/478/about_3.jpg" alt=""
-                                                                                   class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="13" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/6d3/0S1A4740.jpg"
-                                                                                   alt="" class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="14" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img data-lazy="/upload/iblock/3ea/about_6.jpg" alt=""
-                                                                                   class="slick-loading"></div>
-                                    <div class="about-slider-item slick-slide slick-cloned" data-slick-index="15" aria-hidden="true"
-                                         style="width: 1240px;" tabindex="-1"><img alt="" class="" style="opacity: 1;"
-                                                                                   src="/upload/iblock/2a5/about_10.jpg"></div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"></button>
-                    </div>
-                </div>
+            <!-- gallery -->
+            <div class="about-slider-wrapper">
+                <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
+                        onclick="plusSlides(-1)"></button>
+                <? $i = 0; ?>
+                <? foreach ($arResult["PICTURES"] as $item) { ?>
+                    <div class="slider-item fade">
+                        <img src="<?=$item['src']?>" alt=""></div>
+                    <? $i++;
+                } ?>
+                <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
+                        onclick="plusSlides(1)"></button>
             </div>
-            <?$APPLICATION->IncludeComponent(
-                "custom:gallery",
-                "brand_detail",
-                Array(
-                    "PICTURE_IDS" => $arResult["PROPERTIES"]['PICTURES']['VALUE']
-                )
-            );?><?$APPLICATION->IncludeComponent(
-                "bitrix:news.list",
-                "images_from_prop",
-                Array(
-                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
-                    "ADD_SECTIONS_CHAIN" => "Y",
-                    "AJAX_MODE" => "N",
-                    "AJAX_OPTION_ADDITIONAL" => "",
-                    "AJAX_OPTION_HISTORY" => "N",
-                    "AJAX_OPTION_JUMP" => "N",
-                    "AJAX_OPTION_STYLE" => "Y",
-                    "CACHE_FILTER" => "Y",
-                    "CACHE_GROUPS" => "Y",
-                    "CACHE_TIME" => "36000000",
-                    "CACHE_TYPE" => "A",
-                    "CHECK_DATES" => "Y",
-                    "COMPOSITE_FRAME_MODE" => "A",
-                    "COMPOSITE_FRAME_TYPE" => "AUTO",
-                    "DETAIL_URL" => "",
-                    "DISPLAY_BOTTOM_PAGER" => "Y",
-                    "DISPLAY_DATE" => "Y",
-                    "DISPLAY_NAME" => "Y",
-                    "DISPLAY_PICTURE" => "Y",
-                    "DISPLAY_PREVIEW_TEXT" => "Y",
-                    "DISPLAY_TOP_PAGER" => "N",
-                    "FIELD_CODE" => array("",""),
-                    "FILTER_NAME" => "sliderFilter",
-                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-                    "IBLOCK_ID" => "67",
-                    "IBLOCK_TYPE" => "news",
-                    "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
-                    "INCLUDE_SUBSECTIONS" => "Y",
-                    "MESSAGE_404" => "",
-                    "NEWS_COUNT" => "",
-                    "PAGER_BASE_LINK_ENABLE" => "N",
-                    "PAGER_DESC_NUMBERING" => "N",
-                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-                    "PAGER_SHOW_ALL" => "N",
-                    "PAGER_SHOW_ALWAYS" => "N",
-                    "PAGER_TEMPLATE" => ".default",
-                    "PAGER_TITLE" => "Новости",
-                    "PARENT_SECTION" => "",
-                    "PARENT_SECTION_CODE" => "",
-                    "PREVIEW_TRUNCATE_LEN" => "",
-                    "PROPERTY_CODE" => array("PICS","",""),
-                    "SET_BROWSER_TITLE" => "Y",
-                    "SET_LAST_MODIFIED" => "N",
-                    "SET_META_DESCRIPTION" => "Y",
-                    "SET_META_KEYWORDS" => "Y",
-                    "SET_STATUS_404" => "N",
-                    "SET_TITLE" => "Y",
-                    "SHOW_404" => "N",
-                    "SORT_BY1" => "ACTIVE_FROM",
-                    "SORT_BY2" => "SORT",
-                    "SORT_ORDER1" => "DESC",
-                    "SORT_ORDER2" => "ASC",
-                    "STRICT_SECTION_CHECK" => "N"
-                )
-            );?>
 
 		</div>
 

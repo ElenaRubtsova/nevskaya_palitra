@@ -146,8 +146,6 @@ if ($sliderProperty)
 
 /*REVIEWS OF BRAND*/
 if (is_array($arResult["PROPERTIES"]["REVIEWS"]["VALUE"])) {
-    //$arResult["REVIEWS"] = true;
-
     $rews = array();
     $dbres = CIBlockElement::GetList(
         array(),
@@ -170,4 +168,17 @@ if (is_array($arResult["PROPERTIES"]["REVIEWS"]["VALUE"])) {
     }
 
     $arResult["REVIEWS"] = $rews;
+}
+
+/*GALLERY*/
+if ($arResult["PROPERTIES"]["PICTURES"]["VALUE"] != '') {
+    $arResult["PICTURES"] = [];
+    foreach ($arResult["PROPERTIES"]["PICTURES"]["VALUE"] as $id) {
+        $arResult["PICTURES"][] = CFile::ResizeImageGet(
+            $id,
+            array("width"=> 1500, "height"=> 800),
+            BX_RESIZE_IMAGE_PROPORTIONAL_ALT,
+            false
+        );
+    }
 }
