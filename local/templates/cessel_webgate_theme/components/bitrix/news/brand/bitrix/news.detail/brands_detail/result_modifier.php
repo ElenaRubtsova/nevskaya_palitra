@@ -145,7 +145,7 @@ if ($sliderProperty)
 }
 
 /*REVIEWS OF BRAND*/
-if (is_array($arResult["PROPERTIES"]["REVIEWS"]["VALUE"])) {
+if ($arResult["PROPERTIES"]["REVIEWS"]["VALUE"] != '') {
     $rews = array();
     $dbres = CIBlockElement::GetList(
         array(),

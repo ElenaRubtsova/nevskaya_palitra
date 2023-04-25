@@ -175,6 +175,7 @@ $icons_color[] = 'bg-green';
 						?>
 					</div>
                 </div>
+
 				<?if( $arResult['PROPERTIES']['INSTRUCTIONS']) { ?>
 					<div class="section-palettes">
 						<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("INSTRUCTIONS_TITLE")?></h2>
@@ -204,79 +205,93 @@ $icons_color[] = 'bg-green';
 						</div>
 					</div>
 				<?}?>
+
 			</div>
 
-            <div class="section-palettes">
-                <h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("REVIEWS_TITLE")?></h2>
-                <div class="row">
-            <?/*$APPLICATION->IncludeComponent(
-                "custom:reviews",
-                "brand_detail",
-                Array(
-                    "ITEMS" => $arResult["REVIEWS"],
-                    "COUNT_ON_PAGE" => 2
-                )
-            );*/?>
-            <?$APPLICATION->IncludeComponent(
-                "bitrix:news.list",
-                "reviews",
-                Array(
-                    "REVIEWS_ID" => $arResult["PROPERTIES"]["REVIEWS"]["VALUE"],
-                    "COUNT_IN_LIST" => 6,
-                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
-                    "ADD_SECTIONS_CHAIN" => "Y",
-                    "AJAX_MODE" => "N",
-                    "AJAX_OPTION_ADDITIONAL" => "",
-                    "AJAX_OPTION_HISTORY" => "N",
-                    "AJAX_OPTION_JUMP" => "N",
-                    "AJAX_OPTION_STYLE" => "Y",
-                    "CACHE_FILTER" => "N",
-                    "CACHE_GROUPS" => "Y",
-                    "CACHE_TIME" => "36000000",
-                    "CACHE_TYPE" => "A",
-                    "CHECK_DATES" => "Y",
-                    "COMPOSITE_FRAME_MODE" => "A",
-                    "COMPOSITE_FRAME_TYPE" => "AUTO",
-                    "DETAIL_URL" => "",
-                    "DISPLAY_BOTTOM_PAGER" => "Y",
-                    "DISPLAY_DATE" => "Y",
-                    "DISPLAY_NAME" => "Y",
-                    "DISPLAY_PICTURE" => "Y",
-                    "DISPLAY_PREVIEW_TEXT" => "Y",
-                    "DISPLAY_TOP_PAGER" => "N",
-                    "FIELD_CODE" => array("",""),
-                    "FILTER_NAME" => "",
-                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-                    "INCLUDE_SUBSECTIONS" => "Y",
-                    "MESSAGE_404" => "",
-                    "NEWS_COUNT" => "2",
-                    "PAGER_BASE_LINK_ENABLE" => "N",
-                    "PAGER_DESC_NUMBERING" => "N",
-                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-                    "PAGER_SHOW_ALL" => "N",
-                    "PAGER_SHOW_ALWAYS" => "N",
-                    "PAGER_TEMPLATE" => "",
-                    "PAGER_TITLE" => "Отзывы",
-                    "PARENT_SECTION" => "",
-                    "PARENT_SECTION_CODE" => "",
-                    "PREVIEW_TRUNCATE_LEN" => "",
-                    "PROPERTY_CODE" => array("",""),
-                    "SET_BROWSER_TITLE" => "Y",
-                    "SET_LAST_MODIFIED" => "N",
-                    "SET_META_DESCRIPTION" => "Y",
-                    "SET_META_KEYWORDS" => "Y",
-                    "SET_STATUS_404" => "N",
-                    "SET_TITLE" => "Y",
-                    "SHOW_404" => "N",
-                    "SORT_BY1" => "ACTIVE_FROM",
-                    "SORT_BY2" => "SORT",
-                    "SORT_ORDER1" => "DESC",
-                    "SORT_ORDER2" => "ASC",
-                    "STRICT_SECTION_CHECK" => "N"
-                )
-            );?>
+            <!-- reviews -->
+            <div class="container">
+                <div class="section-inner">
+                    <div id="reviews-list" class="reviews-list filter-result" data-available-count="<?=$arParams['COUNT_IN_LIST'];?>" data-max-count="<?=count($arResult["ITEMS"])?>">
+                        <div class="section-palettes">
+                            <h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("REVIEWS_TITLE")?></h2>
+                        </div>
+                        <div class="row">
+                            <? $k = 6; $num = count($arResult["REVIEWS"]);
+                            if ($k < $num) { $n = $k; $showButtonMore = true; }
+                            else $n = $num;?>
+                            <? for ($i = 0; $i < $n; $i++) {
+                                $arItem = $arResult["REVIEWS"][$i];
+                                $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+                                $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
+                                <div id="review-<?=($this->GetEditAreaId($arItem['ID']).$i);?>" class="the-review col-6to12">
+                                    <div class="reviews-slider-item reviews-item w-100">
+                                        <?
+                                        //pp(CFile::GetPath($arItem["PREVIEW_PICTURE"]));
+                                        if ($arItem["PREVIEW_PICTURE"] != 0)
+                                            $SRC = CFile::GetPath($arItem["PREVIEW_PICTURE"]);
+                                        else
+                                            $SRC = "/local/templates/cessel_webgate_theme/images/intro_logo.svg";
+                                        $ALT = $arItem["NAME"];
+                                        ?>
+                                        <div class="slider-item-image">
+                                            <img class="olazy"
+                                                 data-src="<?=$SRC; ?>"
+                                                 alt="<?=$ALT; ?>"/>
+                                        </div>
+                                        <div class="slider-item-body">
+                                            <? if ($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arItem["PREVIEW_TEXT"]) : ?>
+                                                <p><?=$arItem["PREVIEW_TEXT"]; ?></p>
+                                            <? endif ?>
+                                            <h3>
+                                                <? if ((!$arParams["HIDE_LINK_WHEN_NO_DETAIL"]) || ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"])) { ?>
+                                                    <a href="javascript:void(0);" onclick="show_popup($(this))"
+                                                       data-name="<?=$arItem["NAME"];?>"
+                                                       data-image="<?=$SRC;?>"
+                                                       data-detail-text="<?=htmlspecialchars($arItem["DETAIL_TEXT"]);?>"
+                                                    ><?=$arItem["NAME"]?></a>
+                                                <? } else { ?>
+                                                    <?=$arItem["NAME"]?>
+                                                <? } ?>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            <? } //показать кнопку ещё ?>
+                            <? if ($showButtonMore) :
+                                $rewCount = '<span class="rew-count">'. $n . '</span>';
+                                $maxCount = '<span class="max-count">'. $num . '</span>';?>
+                                <div class="section-bottom-reviews load_more_wrapper">
+                        <span class="news-count"><?=sprintf(
+                                '%s %s %s %s %s',
+                                GetMessage('YOU_LOOKED'),
+                                $rewCount,
+                                GetMessage('FROM'),
+                                $maxCount,
+                                GetMessage('REVIEWS_LC')
+                            ); ?></span>
+                                    <button id="show_more_reviews" onclick="window.location.href='/reviews/'"
+                                            class="btn btn-wide bg-red centered">
+                                        <span><?=GetMessage('SHOW_MORE'); ?></span>
+                                    </button>
+                                </div>
+                            <?endif;?>
+                        </div>
+                        <!-- review-popup -->
+                        <div class="overlay" id="review">
+                            <div class="flex-popup">
+                                <div class="popup">
+                                    <span class="close_popup" onclick="close_popup()">X</span>
+                                    <img class="photo"/>
+                                    <h2 class="title"></h2>
+                                    <p class="description"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /review-popup -->
+                    </div>
                 </div>
             </div>
+            <!-- /reviews -->
 
 			<div class="section-bottom justify-center flexed">
 			<?//ar_print($arResult);?>
@@ -287,19 +302,24 @@ $icons_color[] = 'bg-green';
 
             <!-- gallery -->
             <div class="about-slider-wrapper">
-                <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
-                        onclick="plusSlides(-1)"></button>
-                <? $i = 0; ?>
-                <? foreach ($arResult["PICTURES"] as $item) { ?>
-                    <div class="slider-item fade">
-                        <img src="<?=$item['src']?>" alt=""></div>
-                    <? $i++;
-                } ?>
-                <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
-                        onclick="plusSlides(1)"></button>
+                    <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
+                            onclick="plusSlides(-1)"></button>
+                    <? $i = 0; ?>
+                    <? foreach ($arResult["PICTURES"] as $item) { ?>
+                        <div class="slider-item fade">
+                            <img src="<?=$item['src']?>" alt=""></div>
+                        <? $i++;
+                    } ?>
+                    <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
+                            onclick="plusSlides(1)"></button>
+                <div class="dots">
+                <? for($i = 1; $i <= count($arResult["PICTURES"]); $i++) {?>
+                    <span class="dot" onclick="currentSlide(<?=$i?>)"></span>
+                <? } ?>
+                </div>
             </div>
-
-		</div>
+            <!-- /gallery -->
+        </div>
 
 		<?if(($arParams["USE_RATING"]=="Y") && ($arParams["USE_SHARE"] == "Y")) {?> <div class="d-flex justify-content-between"> <? } ?>
 

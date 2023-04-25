@@ -13,4 +13,15 @@
 $this->setFrameMode(true);
 ?>
 
-
+<div class="about-slider-wrapper">
+    <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
+            onclick="plusSlides(-1)"></button>
+        <? $i = 0; ?>
+        <? foreach ($arResult["ITEMS"] as $item) { ?>
+            <div class="slider-item fade">
+                <img src="<?=$item['src']?>" alt=""></div>
+            <? $i++;
+        } ?>
+    <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
+            onclick="plusSlides(1)"></button>
+</div>
