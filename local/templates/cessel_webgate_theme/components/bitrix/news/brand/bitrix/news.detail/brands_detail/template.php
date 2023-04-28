@@ -148,64 +148,7 @@ $icons_color[] = 'bg-green';
 					<?if( $arResult['PROPERTIES']['DOWNLOAD_PALETTE']){?>
 					<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("PALETTE_TITLE")?></h2>
 					<?}?>
-					
-					<div class="row">
-						<?
-                        //print_r($arResult['PROPERTIES']['DOWNLOAD_PALETTE']['VALUE']);
-                        //print_r($arResult['PROPERTIES']['DOWNLOAD_PALETTE_NAMES']['VALUE']);
-							$files_id = $arResult['PROPERTIES']['DOWNLOAD_PALETTE']['VALUE'];
-							$files_names = $arResult['PROPERTIES']['DOWNLOAD_PALETTE']['DESCRIPTION'];
-							foreach($files_id as $index=>$file_id) {
-								$file_link = CFile::GetPath($file_id);
-								if (!empty($file_id)) {
-									?>
-										<div class="col-6to12">
-											<div class="badge badge-hollow">
-												<a href="<?=$file_link?>" class="btn btn-small bg-green badge-download">
-													<svg width="20" height="35">
-														<use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
-													</svg>
-												</a>
-												<h3 class="badge-title"><?=$arResult['PROPERTIES']['DOWNLOAD_PALETTE_NAMES']['VALUE'][$index];?></h3>
-											</div>
-										</div> 
-									<?
-								}
-							}                        
-						?>
-					</div>
                 </div>
-
-				<?if( $arResult['PROPERTIES']['INSTRUCTIONS']) { ?>
-					<div class="section-palettes">
-						<h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("INSTRUCTIONS_TITLE")?></h2>
-						<div class="row">
-							<? 
-								//$files_id = $item['INSTRUCTIONS']['VALUE'];
-								//$files_names = $item['INSTRUCTIONS']['DESCRIPTION'];
-								foreach($arResult['PROPERTIES']['INSTRUCTIONS']['VALUE'] as $index=>$val) {
-									$file_link = CFile::GetPath($val);
-									$file_name = 'File '.($index+1);//$arResult['PROPERTIES']['INSTRUCTIONS']['DESCRIPTION'][$index];
-									if (!empty($file_link)) {
-										?>
-											<div class="col-6to12">
-												<div class="badge badge-hollow">
-													<a href="<?php echo $file_link?>" class="btn btn-small bg-green badge-download">
-														<svg width="20" height="35">
-															<use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
-														</svg>
-													</a>
-													<h3 class="badge-title"><?= $file_name ?></h3>
-												</div>
-											</div> 
-										<?
-									}
-								}                        
-							?>
-						</div>
-					</div>
-				<?}?>
-
 			</div>
 
             <!-- reviews -->
@@ -293,13 +236,6 @@ $icons_color[] = 'bg-green';
             </div>
             <!-- /reviews -->
 
-			<div class="section-bottom justify-center flexed">
-			<?//ar_print($arResult);?>
-				<a href="<?=sky_localized_url('/katalog/brand/brand-is-' . $arResult["CODE"].'/apply/'); ?>" class="btn btn-wide bg-green">
-					<span><?=GetMessage("BRAND_SEE_CATALOG")?></span>
-				</a>
-			</div>
-
             <!-- gallery -->
             <div class="about-slider-wrapper">
                     <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
@@ -323,7 +259,7 @@ $icons_color[] = 'bg-green';
             <!-- dop-properties -->
             <? global $arrFilter;
             $arrFilter = array(
-                'PROPERTY_BRAND' => '358',
+                'PROPERTY_BRAND' => $arResult['ID'],
                 'ACTIVE' => 'Y',
             ); ?>
             <? $APPLICATION->IncludeComponent(
@@ -386,6 +322,14 @@ $icons_color[] = 'bg-green';
                 )
             ); ?>
             <!-- /dop-properties -->
+        </div>
+
+        <div class="container"">
+            <div class="justify-center flexed">
+                <a href="<?=$arParams['BACK_LINK'];?>" class="btn btn-wide bg-green">
+                    <span><?=$arParams['BACK_TEXT'];?></span>
+                </a>
+            </div>
         </div>
 
 		<?if(($arParams["USE_RATING"]=="Y") && ($arParams["USE_SHARE"] == "Y")) {?> <div class="d-flex justify-content-between"> <? } ?>
