@@ -237,23 +237,15 @@ $icons_color[] = 'bg-green';
             <!-- /reviews -->
 
             <!-- gallery -->
-            <div class="about-slider-wrapper">
-                    <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
-                            onclick="plusSlides(-1)"></button>
-                    <? $i = 0; ?>
-                    <? foreach ($arResult["PICTURES"] as $item) { ?>
-                        <div class="slider-item fade">
-                            <img src="<?=$item['src']?>" alt=""></div>
-                        <? $i++;
-                    } ?>
-                    <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
-                            onclick="plusSlides(1)"></button>
-                <div class="dots">
-                <? for($i = 1; $i <= count($arResult["PICTURES"]); $i++) {?>
-                    <span class="dot" onclick="currentSlide(<?=$i?>)"></span>
-                <? } ?>
-                </div>
-            </div>
+            <? $APPLICATION->IncludeComponent(
+                "custom:gallery",
+                "brand_detail",
+                array(
+                    'PICTURE_IDS' =>  $arResult['PROPERTIES']['PICTURES']['VALUE'],
+                    'PICTURE_WIDTH' => 2500,
+                    'PICTURE_HEIGHT' => 1000,
+                )
+            );?>
             <!-- /gallery -->
 
             <!-- dop-properties -->

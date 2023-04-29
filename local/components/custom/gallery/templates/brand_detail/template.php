@@ -17,9 +17,9 @@ $this->setFrameMode(true);
     <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
             onclick="plusSlides(-1)"></button>
         <? $i = 0; ?>
-        <? foreach ($arResult["ITEMS"] as $item) { ?>
+        <? foreach ($arResult["ITEMS"] as $file) { ?>
             <div class="slider-item fade">
-                <img src="<?=$item['src']?>" alt=""></div>
+                <?=CFile::ShowImage($file['src'], $arParams['PICTURE_WIDTH'], $arParams['PICTURE_HEIGHT']);?></div>
             <? $i++;
         } ?>
     <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
