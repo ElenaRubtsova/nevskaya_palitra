@@ -19,7 +19,14 @@ $this->setFrameMode(true);
         <? $i = 0; ?>
         <? foreach ($arResult["ITEMS"] as $file) { ?>
             <div class="slider-item fade">
-                <?=CFile::ShowImage($file['src'], $arParams['PICTURE_WIDTH'], $arParams['PICTURE_HEIGHT']);?></div>
+                <?=CFile::ShowImage(
+                        $file['src'],
+                        $arParams['PICTURE_WIDTH'],
+                        $arParams['PICTURE_HEIGHT'],
+                        "border=0",
+                        "",
+                        true
+                );?></div>
             <? $i++;
         } ?>
     <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
