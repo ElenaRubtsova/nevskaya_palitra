@@ -18,7 +18,7 @@ $this->setFrameMode(true);
             onclick="plusSlides(-1)"></button>
         <? $i = 0; ?>
         <? foreach ($arResult["ITEMS"] as $file) { ?>
-            <div class="slider-item fade">
+            <div class="slider-item fade respond">
                 <?=CFile::ShowImage(
                         $file['src'],
                         $arParams['PICTURE_WIDTH'],

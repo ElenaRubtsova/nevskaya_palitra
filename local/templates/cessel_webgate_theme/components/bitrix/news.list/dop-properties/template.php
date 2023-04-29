@@ -40,7 +40,7 @@ $this->setFrameMode(true);
                            $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
                         <div class="card-body">
                             <h2><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></h2>
-                            <div class="image">
+                            <div class="image respond">
                                 <?$file = CFile::ResizeImageGet(
                                     $arItem['PREVIEW_PICTURE'],
                                     array(
@@ -149,7 +149,7 @@ $this->setFrameMode(true);
                                         BX_RESIZE_PROPORTIONAL,
                                         true
                                     );?>
-                                    <div class="image"><?=CFile::ShowImage($file['src']);?></div>
+                                    <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
                                     <? if($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') : ?>
                                         <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>">
                                         <? $endatag = '</a>';
