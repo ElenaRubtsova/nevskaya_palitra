@@ -1,0 +1,76 @@
+<? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
+$flag = 0;
+$card_styles = ['bg-image-red', 'bg-image-blue', 'bg-image-green', 'bg-image-orange'];
+$btn_styles = ['bg-red', 'bg-blue', 'bg-green', 'bg-orange'];
+?>
+
+<section class="page-section">
+	<div class="container">
+		<div class="section-inner">
+			<div class="section-title">
+				<h1 class="title-with-image"><? inc("colors_title", "text"); ?></h1>
+			</div>
+		</div>
+		<div class="index-catalog">
+			<div class="row">
+				<?php
+					foreach ($arResult['BRANDS'] as $BRAND_ID => $BRAND ) {
+						if($BRAND_ID == 1053) { continue; }
+
+						if (count($BRAND['DOWNLOAD_PALETTE'])) {
+							?>
+							<div class="col-6to12">
+								<div style="display: none"><?php print_r($flag);?></div>
+
+								<div class='<?php echo "card card-big with-image-bg $card_styles[$flag]" ?>'>
+									<div class="brand-logo">
+										<img 	
+											
+											src="<?php echo CFile::GetPath($BRAND['PREVIEW_PICTURE'])?>" 
+											alt="<?=$BRAND['NAME']; ?>"
+										/>
+									</div>
+									
+									<h2 class="card-big-title"><?php echo $BRAND['NAME'];?></h2>
+									<div class="card-big-body">
+										<?php 
+											foreach ($BRAND["DOWNLOAD_PALETTE"] as $index => $file_id) :
+											$fileInfo = CFile::GetFileArray($file_id);
+											$data_size = sprintf('%s, %d Kb', $fileInfo["FILE_NAME"], sky_size_units($fileInfo["FILE_SIZE"]));
+											if (isset($BRAND["DOWNLOAD_PALETTE_NAMES"]) && isset($BRAND["DOWNLOAD_PALETTE_NAMES"][$index]))
+												$data_size = $BRAND["DOWNLOAD_PALETTE_NAMES"][$index];
+											?>
+											<div class="badge badge-hollow">
+												<a href="<?php echo $fileInfo["SRC"] ?>" class='<?php echo "btn btn-small $btn_styles[$flag] badge-download"?>'>
+													<svg width="20" height="35">
+														<use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
+													</svg>
+												</a>
+												<h3 class="badge-title"><?=$data_size;?></h3>
+												
+											</div>
+											
+										<? endforeach;
+										?>
+										
+									</div>
+									
+								</div>
+							</div>
+						<?php
+						}
+						
+						$flag++;
+					} 
+				?>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+

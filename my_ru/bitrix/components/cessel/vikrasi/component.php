@@ -46,6 +46,19 @@ $reqCode = isset($_REQUEST["brand_req_code"]) ? $_REQUEST["brand_req_code"] : NU
 		}
 	}
 } */
+function pp($arr, $name = '') {
+    global $USER;
+    if ($USER->isAdmin()) {
+        echo("<pre>$name "); print_r($arr); echo('</pre>');
+    }
+}
+function unio($arr, $str) : array {
+    $result = array_map(function($value) use ($str) {
+        return $str . $value;
+    }, $arr);
+    return $result;
+}
+
 
 $arFilter["IBLOCK_ID"] = sky_local_iblock("brands");
 $props = array(
@@ -56,7 +69,11 @@ $props = array(
 	"DETAIL_TEXT", 
 	"PREVIEW_PICTURE", 
 	"PROPERTY_DOWNLOAD_PALETTE",
-	"PROPERTY_DOWNLOAD_PALETTE_NAMES"
+	"PROPERTY_DOWNLOAD_PALETTE_NAMES",
+    "PROPERTY_LINK_FILE_PALETTE",
+    "PROPERTY_LINK_FILE_PALETTE.DESCRIPTION",
+    "PROPERTY_LINK_FILE_INSTRUCTIONS",
+    "PROPERTY_LINK_FILE_INSTRUCTIONS.DESCRIPTION",
 );
 $res = CIBlockElement::GetList(Array(), $arFilter,'','', $props);
 while($brands_fields = $res->GetNext()) {
@@ -71,6 +88,18 @@ while($brands_fields = $res->GetNext()) {
 	$arResult['BRANDS'][$brands_fields["ID"]]['DETAIL_TEXT'] = $brands_fields['DETAIL_TEXT'];
 	$arResult['BRANDS'][$brands_fields["ID"]]['DOWNLOAD_PALETTE'] = $brands_fields['PROPERTY_DOWNLOAD_PALETTE_VALUE'];
 	$arResult['BRANDS'][$brands_fields["ID"]]['DOWNLOAD_PALETTE_NAMES'] = $brands_fields['PROPERTY_DOWNLOAD_PALETTE_NAMES_VALUE'];
+	$arResult['BRANDS'][$brands_fields["ID"]]['LINK_FILE_PALETTE'] = $brands_fields['PROPERTY_LINK_FILE_PALETTE_VALUE'];
+	$arResult['BRANDS'][$brands_fields["ID"]]['LINK_FILE_PALETTE_DESCRIPTION'] = $brands_fields['PROPERTY_LINK_FILE_PALETTE_DESCRIPTION'];
+	$arResult['BRANDS'][$brands_fields["ID"]]['LINK_FILE_INSTRUCTIONS'] = $brands_fields['PROPERTY_LINK_FILE_INSTRUCTIONS_VALUE'];
+	$arResult['BRANDS'][$brands_fields["ID"]]['LINK_FILE_INSTRUCTIONS_DESCRIPTION'] = $brands_fields['PROPERTY_LINK_FILE_INSTRUCTIONS_DESCRIPTION'];
+
+    pp($arResult['BRANDS'][$brands_fields["ID"]]['NAME']);
+    pp($brands_fields['PROPERTY_LINK_FILE_PALETTE_VALUE'], 'Выкраски (значения)');
+    pp($brands_fields['PROPERTY_LINK_FILE_PALETTE_DESCRIPTION'], 'Выкраски (описания)');
+    pp($brands_fields['PROPERTY_LINK_FILE_INSTRUCTIONS_VALUE'], 'Инструкции (значения)');
+    pp($brands_fields['PROPERTY_LINK_FILE_INSTRUCTIONS_DESCRIPTION'], 'Инструкции (описания)');
+    //pp(unio($arResult['BRANDS'][$brands_fields["ID"]]['LINK_FILE_PALETTE'], '/brands/vukraski/'));
+    //pp(unio($arResult['BRANDS'][$brands_fields["ID"]]['LINK_FILE_INSTRUCTIONS'], '/brands/instructions/'));
 
 	if ($reqFullList && $reqCode && $reqCode = $brands_fields['CODE'])
 		$arResult['MAX_ELEMENTS'] = -1;
