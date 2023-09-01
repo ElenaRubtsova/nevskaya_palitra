@@ -160,25 +160,28 @@ $this->setFrameMode(true);
 
                             <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                 <div class="card-body">
-                                    <? $file = CFile::ResizeImageGet(
+                                    <?
+                                    $width = 300;
+                                    if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
+                                        $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+
+                                    $height = 300;
+                                    if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
+                                        $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
+
+                                    $file = CFile::ResizeImageGet(
                                         $arItem['PREVIEW_PICTURE'],
-                                        array(
-                                            'width' => //($arItem['PROPERTIES']['PICTURE_DOP_WIDTH']['VALUE'] !== false) ?
-                                                //$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] :
-                                                300,
-                                            'height' => //($arItem['PROPERTIES']['PICTURE_DOP_HEIGHT']['VALUE'] !== false) ?
-                                                //$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] :
-                                                300,
-                                        ),
+                                        array('width' => $width, 'height' => $height),
                                         BX_RESIZE_PROPORTIONAL,
                                         true
                                     );?>
                                     <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
                                     <?if ($arItem['PROPERTIES']['FORMS'] != '') {?>
-                                        <? foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
+                                        <?
+                                        foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
                                             $file = CFile::ResizeImageGet(
                                                 $photo,
-                                                array('width' => 300, 'height' => 300),
+                                                array('width' => $width, 'height' => $width),
                                                 BX_RESIZE_PROPORTIONAL,
                                                 true
                                             );?>
