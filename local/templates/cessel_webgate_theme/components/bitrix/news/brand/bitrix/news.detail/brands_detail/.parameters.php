@@ -31,6 +31,11 @@ while ($property = $propertyList->Fetch())
 }
 
 $arTemplateParameters = array(
+    "COUNT_PAINTING_SETS" => Array(
+        "NAME" => GetMessage("T_IBLOCK_COUNT_PAINTING_SETS"),
+        "TYPE" => "NUMBER",
+        "DEFAULT" => 200,
+    ),
 	"DISPLAY_DATE" => Array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_DATE"),
 		"TYPE" => "CHECKBOX",

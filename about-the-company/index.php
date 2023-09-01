@@ -22,7 +22,7 @@ $APPLICATION->SetTitle("About company");
 <div class="container">
 	<div class="section-inner">
 		<div class="timeline-wrapper">
-			<h2><? inc("about_history_title", "text"); ?></h2>
+            <h2><? inc("about_history_title", "text"); ?></h2>
 			<div class="timeline">
 				<div class="timeline-item">
 					<div class="timeline-item-text">
@@ -68,7 +68,7 @@ $APPLICATION->SetTitle("About company");
 		</div>
 	</div>
 </div>
- </section> <section class="page-section">
+ </section> <!--<section class="page-section">
 <div class="container">
 	<div class="section-inner">
 		<div class="row">
@@ -119,7 +119,7 @@ $APPLICATION->SetTitle("About company");
 		</div>
 	</div>
 </div>
- </section> <section class="page-section">
+ </section>--> <section class="page-section">
 <div class="container">
 	<div class="section-inner">
 		<div class="about-slider-wrapper">
@@ -217,70 +217,40 @@ $APPLICATION->SetTitle("About company");
 			<div class="row">
 				<div class="col-6to12">
 					<div class="card-wrapper">
+                    <a href="/info/vironment-and-safety/" style="text-decoration: none;">
 						<div class="card card-headless card-headless-color"
                              style="background-image: url(/local/templates/cessel_webgate_theme/images/cards/about_card_green.png);">
 							 <span class="bxhtmled-surrogate-inner">
                                  <span class="bxhtmled-right-side-item-icon"></span>
                                  <span class="bxhtmled-comp-lable" unselectable="on" spellcheck="false"></span>
                              </span>
-							<h3>We search for pigments and produce them</h3>
+							<h3>Environment and safety</h3>
 							<p>
 								 Geologists are on the hunt for new, natural inorganic pigments contained in rocks and minerals. The part of <br>
 								 synthetic inorganic pigments (cadmium, and cobalt) that is especially valuable for painting is produced in <br>
 								 our own pigment workshop.
 							</p>
 						</div>
+                    </a>
 					</div>
 				</div>
 				<div class="col-6to12">
 					<div class="card-wrapper">
+                        <a href="/info/color-index-pigments/" style="text-decoration: none;">
                         <div class="card card-headless card-headless-color"
                              style="background-image: url(/local/templates/cessel_webgate_theme/images/cards/about_card_orange.png);">
 							 <span class="bxhtmled-surrogate-inner">
                                  <span class="bxhtmled-right-side-item-icon"></span>
                                  <span class="bxhtmled-comp-lable" unselectable="on" spellcheck="false"></span>
                              </span>
-                            <h3>We create formulations</h3>
+                            <h3>Colour pigments</h3>
 							<p>
 								 Pigments are delivered to the chemical laboratory of the plant to develop test and process samples <br>
 								 before starting the mass production. Here we precisely determine, the proportions of pigments, binders and additives<br>
 								 to obtain a particular color.
 							</p>
 						</div>
-					</div>
-				</div>
-				<div class="col-6to12">
-					<div class="card-wrapper">
-                        <div class="card card-headless card-headless-color"
-                             style="background-image: url(/local/templates/cessel_webgate_theme/images/cards/about_card_red.png);">
-							 <span class="bxhtmled-surrogate-inner">
-                                 <span class="bxhtmled-right-side-item-icon"></span>
-                                 <span class="bxhtmled-comp-lable" unselectable="on" spellcheck="false"></span>
-                             </span>
-                            <h3>We make the paint</h3>
-							<p>
-								 In order to blend all the components of watercolors and oil paints, they are ground using special paint-grinding machines.<br>
-								 Depending on pigment characteristics, some paints are passed through the shafts <br>
-								 up to 40 times. Acrylic paints are produced using a different technology which involves the use of dissolvers
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-6to12">
-					<div class="card-wrapper">
-                        <div class="card card-headless card-headless-color"
-                             style="background-image: url(/local/templates/cessel_webgate_theme/images/cards/about_card_blue.png);">
-							 <span class="bxhtmled-surrogate-inner">
-                                 <span class="bxhtmled-right-side-item-icon"></span>
-                                 <span class="bxhtmled-comp-lable" unselectable="on" spellcheck="false"></span>
-                             </span>
-                            <h3>We control the quality</h3>
-							<p>
-								 The finished product is checked for compliance with various indicators: lightfastness, spreading property,<br>
-								 viscosity and covering power. Paints should maintain brightness and purity of tone. If the sample from the <br>
-								 workshop exactly matches the color standard, then technologists launch the mass production of a new product.
-							</p>
-						</div>
+                        </a>
 					</div>
 				</div>
 			</div>

@@ -13,14 +13,34 @@ h2, .image {
     font-size: 36px !important;
     padding-top: 30px !important;
 }
+.card-body .big {
+    text-align: center !important;
+    min-height: 1em !important;
+    padding: 30px 0px 20px 0px !important;
+}
 .card-body h3 {
     text-align: center !important;
     min-height: 1em !important;
-    padding: 0px 0px 30px 0px !important;
+    line-height: 1.3;
+    padding: 20px 0px 20px 0px !important;
 }
-.col-6to12 {
+.pad {
     padding-bottom: 30px !important;
+}
+.bot {
+    padding-bottom: 20px !important;
 }
 .badge-title {
     text-align: left !important;
+    /*font-size: 18px !important;
+    line-height: 1.35;*/
+}
+/*.kad {
+    flex: 0 0 50% !important;
+}*/
+@media screen and (min-width: 992px) {
+    .kad {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
 }

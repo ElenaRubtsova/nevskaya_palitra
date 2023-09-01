@@ -30,51 +30,73 @@ $this->setFrameMode(true);
 <? foreach ($arResult["ITEMS"] as $category => $blocks) : ?>
     <div class="block">
         <!-- osnovnoy-block -->
+        <?//print_r($blocks['Y']);?>
         <? if ($blocks['Y'] !== ''): ?>
-            <div style="padding-bottom: 40px"></div>
+            <div style="padding-bottom: 20px"></div><?//print_r($blocks['Y']);?>
             <? foreach ($blocks['Y'] as $arItem) : ?>
-                <? if ($arItem !== ''): ?>
-                    <div class="card">
-                        <!--<div class="col-6to12">-->
-                        <? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-                           $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
+                <? if ($arItem !== ''): ?><?/*='<pre>';print_r($arItem);echo('</pre>');*/?>
+                    <? $this->AddEditAction(
+                        $arItem['ID'],
+                        $arItem['EDIT_LINK'],
+                        CIBlock::GetArrayByID(
+                            $arItem["IBLOCK_ID"],
+                            "ELEMENT_EDIT"
+                        )
+                    );
+                    $this->AddDeleteAction(
+                        $arItem['ID'],
+                        $arItem['DELETE_LINK'],
+                        CIBlock::GetArrayByID(
+                            $arItem["IBLOCK_ID"],
+                            "ELEMENT_DELETE"),
+                        array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))
+                    );?>
+                    <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                         <div class="card-body">
-                            <h2><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></h2>
-                            <div class="image respond">
-                                <?$file = CFile::ResizeImageGet(
-                                    $arItem['PREVIEW_PICTURE'],
-                                    array(
-                                        'width' => //($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] !== false) ?
-                                            //$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] :
-                                            500,
-                                        'height' => //($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] !== false) ?
-                                            //$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] :
-                                            500,
-                                    ),
-                                    BX_RESIZE_PROPORTIONAL,
-                                    true
-                                );?>
-                                <?=CFile::ShowImage($file['src']);
-                                //CFile::ShowImage($arItem['PREVIEW_PICTURE']['UNSAFE_SRC']);?>
-                            </div>
-                            <h3><?=$arItem['NAME'];?></h3>
-                            <div class="desc"><?=$arItem['PREVIEW_TEXT'];?></div>
+                            <div class="row">
+                                <div class="col-6to12">
+                                    <h2><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></h2>
+                                    <div class="image respond">
+                                        <?$file = CFile::ResizeImageGet(
+                                            $arItem['PREVIEW_PICTURE'],
+                                            array(
+                                                'width' => //($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] !== false) ?
+                                                    //$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] :
+                                                    500,
+                                                'height' => //($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] !== false) ?
+                                                    //$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] :
+                                                    500,
+                                            ),
+                                            BX_RESIZE_PROPORTIONAL,
+                                            true
+                                        );?>
+                                        <!--<img height="500" src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>">-->
+                                        <?=CFile::ShowImage($file['src']);
+                                        //CFile::ShowImage($arItem['PREVIEW_PICTURE']['UNSAFE_SRC']);?>
 
-                            <div class="image">
-                                <? foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
-                                    $file = CFile::ResizeImageGet(
-                                        $photo,
-                                        array('width' => 400, 'height' => 150),
-                                        BX_RESIZE_PROPORTIONAL,
-                                        true
-                                    );?>
-                                    <?=CFile::ShowImage($file['src']);?>
-                                <? endforeach; ?>
+                                    </div>
+                                </div>
+                                <div class="col-6to12">
+                                    <h3 class="big"><?=$arItem['NAME'];?></h3>
+                                    <div class="desc"><?=$arItem['PREVIEW_TEXT'];?></div>
+                                    <div class="image">
+                                        <? foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
+                                            $file = CFile::ResizeImageGet(
+                                                $photo,
+                                                array('width' => 1700, 'height' => 250),
+                                                BX_RESIZE_PROPORTIONAL,
+                                                true
+                                            );?>
+                                            <?//=CFile::ShowImage($file['src']);?>
+                                        <img width="340" src="<?=$file['src']?>">
+                                        <? endforeach; ?>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
                                 <? if ($arItem['PROPERTIES']['VYKRASKA']['VALUE'] !== '') : ?>
-                                    <div class="col-3to12">
+                                    <div class="kad col-3to12">
                                         <div class="benefit">
                                             <div class="badge badge-hollow">
                                                 <a href="<?=$arItem['PROPERTIES']['VYKRASKA']['VALUE'];?>"
@@ -89,52 +111,54 @@ $this->setFrameMode(true);
                                     </div>
                                 <? endif; ?>
                                 <? if ($arItem['PROPERTIES']['INSTRUCTION']['VALUE'] !== '') : ?>
-                                    <div class="col-3to12">
-                                        <div class="benefit">
-                                            <div class="badge badge-hollow">
-                                                <a href="<?=$arItem['PROPERTIES']['INSTRUCTION']['VALUE'];?>"
-                                                   class="btn btn-small bg-green badge-download">
-                                                    <svg width="20" height="35">
-                                                        <use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
-                                                    </svg>
-                                                </a>
-                                                <h4 class="badge-title">Instruction</h4>
-                                            </div>
-                                        </div>
-                                    </div><? endif; ?>
-                                <? if ($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') : ?>
-                                <div class="col-3to12">
+                                    <div class="kad col-3to12">
                                     <div class="benefit">
                                         <div class="badge badge-hollow">
-                                            <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>"
+                                            <a href="<?=$arItem['PROPERTIES']['INSTRUCTION']['VALUE'];?>"
                                                class="btn btn-small bg-green badge-download">
                                                 <svg width="20" height="35">
                                                     <use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
                                                 </svg>
                                             </a>
-                                            <h4 class="badge-title">Catalog</h4>
+                                            <h4 class="badge-title">Instruction</h4>
                                         </div>
                                     </div>
-                                </div>
+                                    </div><? endif; ?>
+                                <? if ($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') : ?>
+                                    <div class="kad col-3to12">
+                                        <div class="benefit">
+                                            <div class="badge badge-hollow">
+                                                <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>"
+                                                   class="btn btn-small bg-green badge-download">
+                                                    <svg width="20" height="35">
+                                                        <use xlink:href="/local/templates/cessel_webgate_theme/images/icons/sprite.svg#icon_arrow_down"></use>
+                                                    </svg>
+                                                </a>
+                                                <h4 class="badge-title">Catalog</h4>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <? endif; ?>
                             </div>
                         </div>
-                        <!--</div>--><br>
-                    </div>
+                    </div><br>
                 <? endif; ?>
             <? endforeach; ?>
         <? endif; ?>
 
         <!-- dop-sets -->
+        <?//print_r($blocks['N']);?>
         <? if ($blocks['N'] !== ''): ?>
             <div style="padding-bottom: 30px"></div>
             <div class="row">
-                <? foreach ($blocks['N'] as $arItem): ?>
-                    <? if ($arItem !== ''): ?>
-                        <div class="col-6to12">
-                            <div class="card">
-                                <? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-                                $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
+                <? foreach ($blocks['N'] as $arItem): ?><?/*echo('<pre>');print_r($arItem['ID']);echo('</pre>');*/?>
+                    <? if ($arItem !== '' /*&& $arItem['FORMS']['ACTIVE'] === 'Y'*/): ?>
+                    <? $cl = 'col-3to12'; if ($arItem['PROPERTIES']['WIDTH']['VALUE'] != '') $cl = $arItem['PROPERTIES']['WIDTH']['VALUE'];?>
+                        <div class="pad <?=$cl;?>">
+                            <? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+                            $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
+
+                            <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                 <div class="card-body">
                                     <? $file = CFile::ResizeImageGet(
                                         $arItem['PREVIEW_PICTURE'],
@@ -150,6 +174,19 @@ $this->setFrameMode(true);
                                         true
                                     );?>
                                     <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
+                                    <?if ($arItem['PROPERTIES']['FORMS'] != '') {?>
+                                        <? foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
+                                            $file = CFile::ResizeImageGet(
+                                                $photo,
+                                                array('width' => 300, 'height' => 300),
+                                                BX_RESIZE_PROPORTIONAL,
+                                                true
+                                            );?>
+                                            <?//=CFile::ShowImage($file['src']);?>
+                                        <div class="image respond">
+                                            <img src="<?=$file['src']?>"></div>
+                                        <? endforeach; ?>
+                                    <?}?>
                                     <? if($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') : ?>
                                         <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>">
                                         <? $endatag = '</a>';

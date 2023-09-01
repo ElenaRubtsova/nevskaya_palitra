@@ -302,6 +302,21 @@
 .popup h2 {
 	padding-top: 35px;
 }
+/* Таблицы */
+td {
+	padding: 5px;
+	padding-right: 10px;
+	/*border: 1px solid lightgray;*/
+	vertical-align: top;
+}
+/* Абзацы (черный текст вместо серого) */
+.card-body p {
+	color: black !important;
+	min-height: 1em !important;
+}
+.card-body li {
+	color: black !important;
+}
 
 /*--
 --- Галерея изображений - слайдер (картинки)

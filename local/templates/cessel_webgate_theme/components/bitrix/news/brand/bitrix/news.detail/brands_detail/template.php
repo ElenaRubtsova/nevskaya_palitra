@@ -181,7 +181,7 @@ $icons_color[] = 'bg-green';
                         "DISPLAY_PICTURE" => "Y",
                         "DISPLAY_PREVIEW_TEXT" => "Y",
                         "DISPLAY_TOP_PAGER" => "N",
-                        "FIELD_CODE" => array("", ""),
+                        "FIELD_CODE" => array("SORT", ""),
                         "FILTER_NAME" => "arrFilter",
                         "HIDE_LINK_WHEN_NO_DETAIL" => "N",
                         "IBLOCK_ID" => "75",
@@ -189,7 +189,7 @@ $icons_color[] = 'bg-green';
                         "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
                         "INCLUDE_SUBSECTIONS" => "Y",
                         "MESSAGE_404" => "",
-                        "NEWS_COUNT" => "20",
+                        "NEWS_COUNT" => "200",
                         "PAGER_BASE_LINK_ENABLE" => "N",
                         "PAGER_DESC_NUMBERING" => "N",
                         "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -208,27 +208,29 @@ $icons_color[] = 'bg-green';
                         "SET_STATUS_404" => "N",
                         "SET_TITLE" => "Y",
                         "SHOW_404" => "N",
-                        "SORT_BY1" => "ACTIVE_FROM",
-                        "SORT_BY2" => "SORT",
-                        "SORT_ORDER1" => "DESC",
+                        "SORT_BY1" => "SORT",
+                        "SORT_BY2" => "ID",
+                        "SORT_ORDER1" => "ASC",
                         "SORT_ORDER2" => "ASC",
                         "STRICT_SECTION_CHECK" => "N",
                     )
                 ); ?>
                 <!-- /dop-properties -->
 
-                <!-- gallery -->
-                <? $APPLICATION->IncludeComponent(
-                    "custom:gallery",
-                    "brand_detail",
-                    array(
-                        'PICTURE_IDS' =>  $arResult['PROPERTIES']['PICTURES']['VALUE'],
-                        'PICTURE_WIDTH' => 2500,
-                        'PICTURE_HEIGHT' => 1000,
-                    )
-                );?>
-                <!-- /gallery -->
-
+        <?if(!empty($arResult['PROPERTIES']['PICTURES']['VALUE'])) {?>
+            <!-- gallery -->
+            <? $APPLICATION->IncludeComponent(
+                "custom:gallery",
+                "brand_detail",
+                array(
+                    'PICTURE_IDS' =>  $arResult['PROPERTIES']['PICTURES']['VALUE'],
+                    'PICTURE_WIDTH' => 2500,
+                    'PICTURE_HEIGHT' => 1000,
+                )
+            );?>
+            <!-- /gallery -->
+        <?}?>
+        <?if(!empty($arResult["REVIEWS"])) {?>
             <!-- reviews -->
             <div class="container">
                 <div class="section-inner">
@@ -313,6 +315,7 @@ $icons_color[] = 'bg-green';
                 </div>
             </div>
             <!-- /reviews -->
+        <?}?>
         </div>
 
         </div>
