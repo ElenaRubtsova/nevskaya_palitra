@@ -32,7 +32,7 @@ $this->setFrameMode(true);
         <!-- osnovnoy-block -->
         <?//print_r($blocks['Y']);?>
         <? if ($blocks['Y'] !== ''): ?>
-            <div style="padding-bottom: 20px"></div><?//print_r($blocks['Y']);?>
+            <div style="padding-bottom: 30px"></div><?//print_r($blocks['Y']);?>
             <? foreach ($blocks['Y'] as $arItem) : ?>
                 <? if ($arItem !== ''): ?><?/*='<pre>';print_r($arItem);echo('</pre>');*/?>
                     <? $this->AddEditAction(
@@ -56,25 +56,32 @@ $this->setFrameMode(true);
                             <div class="row">
                                 <div class="col-6to12">
                                     <h2><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></h2>
+                                <? if ($arItem['PREVIEW_PICTURE'] != '') {
+                                    $width = 500;
+                                    if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
+                                        $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+
+                                    $height = 500;
+                                    if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
+                                        $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
+
+                                    $file = CFile::ResizeImageGet(
+                                        $arItem['PREVIEW_PICTURE'],
+                                        array('width' => $width, 'height' => $height),
+                                        BX_RESIZE_PROPORTIONAL,
+                                        true
+                                    );?>
                                     <div class="image respond">
                                         <?$file = CFile::ResizeImageGet(
                                             $arItem['PREVIEW_PICTURE'],
-                                            array(
-                                                'width' => //($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] !== false) ?
-                                                    //$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] :
-                                                    500,
-                                                'height' => //($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] !== false) ?
-                                                    //$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] :
-                                                    500,
-                                            ),
+                                            array('width' => $width, 'height' => $height),
                                             BX_RESIZE_PROPORTIONAL,
                                             true
                                         );?>
-                                        <!--<img height="500" src="<?=$arItem['PREVIEW_PICTURE']['SRC']?>">-->
-                                        <?=CFile::ShowImage($file['src']);
-                                        //CFile::ShowImage($arItem['PREVIEW_PICTURE']['UNSAFE_SRC']);?>
-
+                                        <?=CFile::ShowImage($file['src']);?>
                                     </div>
+                                    <? } ?>
+
                                 </div>
                                 <div class="col-6to12">
                                     <h3 class="big"><?=$arItem['NAME'];?></h3>
@@ -87,7 +94,6 @@ $this->setFrameMode(true);
                                                 BX_RESIZE_PROPORTIONAL,
                                                 true
                                             );?>
-                                            <?//=CFile::ShowImage($file['src']);?>
                                         <img width="340" src="<?=$file['src']?>">
                                         <? endforeach; ?>
                                     </div>
@@ -149,7 +155,7 @@ $this->setFrameMode(true);
         <!-- dop-sets -->
         <?//print_r($blocks['N']);?>
         <? if ($blocks['N'] !== ''): ?>
-            <div style="padding-bottom: 30px"></div>
+            <div style="padding-bottom: 20px"></div>
             <div class="row">
                 <? foreach ($blocks['N'] as $arItem): ?><?/*echo('<pre>');print_r($arItem['ID']);echo('</pre>');*/?>
                     <? if ($arItem !== '' /*&& $arItem['FORMS']['ACTIVE'] === 'Y'*/): ?>
@@ -160,7 +166,7 @@ $this->setFrameMode(true);
 
                             <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                 <div class="card-body">
-                                    <?
+                                    <? if ($arItem['PREVIEW_PICTURE'] != '') {
                                     $width = 300;
                                     if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
                                         $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
@@ -176,18 +182,26 @@ $this->setFrameMode(true);
                                         true
                                     );?>
                                     <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
-                                    <?if ($arItem['PROPERTIES']['FORMS'] != '') {?>
-                                        <?
+                                    <? } ?>
+                                    <?if ($arItem['PROPERTIES']['FORMS'] != '') {
+                                        $width = 300;
+                                        if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
+                                            $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+
+                                        $height = 300;
+                                        if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
+                                            $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
+
                                         foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
                                             $file = CFile::ResizeImageGet(
                                                 $photo,
-                                                array('width' => $width, 'height' => $width),
+                                                array('width' => $width, 'height' => $height),
                                                 BX_RESIZE_PROPORTIONAL,
                                                 true
                                             );?>
-                                            <?//=CFile::ShowImage($file['src']);?>
                                         <div class="image respond">
-                                            <img src="<?=$file['src']?>"></div>
+                                            <?=CFile::ShowImage($file['src']);?>
+                                            </div>
                                         <? endforeach; ?>
                                     <?}?>
                                     <? if($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') : ?>
