@@ -13,6 +13,31 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+class Element {
+    private $arItem;
+    public function __construct (array $arItem) {
+        $this->arItem = $arItem;
+    }
+    public function echoTitle() {
+        if ($this->arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') {?>
+            <a href="<?=$this->arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>">
+                <? $endatag = '</a>';
+        }?>
+            <h3><?=$arItem['NAME'];?></h3><?=$endatag;
+    }
+    public function echoImages() {
+
+    }
+}
+
+function echoBlockTitle($arItem) {
+        if ($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') {?>
+            <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>">
+                <? $endatag = '</a>';
+        }?>
+            <h3><?=$arItem['NAME'];?></h3><?=$endatag;
+    }
 //if($USER->isAdmin()) {echo('<pre>');print_r($arResult["ITEMS"][0]);echo('</pre>');}
 //print_r($arResult["ITEMS"][0]['NAME']);
 //print_r($arResult["ITEMS"][0]['DETAIL_TEXT']);
@@ -166,51 +191,78 @@ $this->setFrameMode(true);
 
                             <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                 <div class="card-body">
-                                    <? if ($arItem['PREVIEW_PICTURE'] != '') {
-                                    $width = 300;
-                                    if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
-                                        $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+                                    <? $element = new Element($arItem);
 
-                                    $height = 300;
-                                    if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
-                                        $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
+                                    if ($arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_right') {
+                                        $text_right = true;
+                                        $a1 = '<div class="row">'; $a2 = '</div>';
+                                        $p1 = '<div class="col-6to12">'; $p2 = '</div>';
+                                        echoBlockTitle($arItem);
+                                        ?><div style="padding-bottom: 15px"></div><?
+                                    } elseif ($arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_left') {
+                                        $text_left = true;
+                                        $la1 = '<div class="row">'; $la2 = '</div>';
+                                        $lp1 = '<div class="col-6to12">'; $lp2 = '</div>';
+                                    } ?>
+                                    <?=$a1;?>
+                                        <?=$p1;?>
+                                            <? if ($arItem['PREVIEW_PICTURE'] != '') {
+                                            $width = 300;
+                                            if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
+                                                $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
 
-                                    $file = CFile::ResizeImageGet(
-                                        $arItem['PREVIEW_PICTURE'],
-                                        array('width' => $width, 'height' => $height),
-                                        BX_RESIZE_PROPORTIONAL,
-                                        true
-                                    );?>
-                                    <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
-                                    <? } ?>
-                                    <?if ($arItem['PROPERTIES']['FORMS'] != '') {
-                                        $width = 300;
-                                        if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
-                                            $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+                                            $height = 300;
+                                            if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
+                                                $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
 
-                                        $height = 300;
-                                        if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
-                                            $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
-
-                                        foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
                                             $file = CFile::ResizeImageGet(
-                                                $photo,
+                                                $arItem['PREVIEW_PICTURE'],
                                                 array('width' => $width, 'height' => $height),
                                                 BX_RESIZE_PROPORTIONAL,
                                                 true
                                             );?>
-                                        <div class="image respond">
-                                            <?=CFile::ShowImage($file['src']);?>
-                                            </div>
-                                        <? endforeach; ?>
-                                    <?}?>
-                                    <? if($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') : ?>
-                                        <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>">
-                                        <? $endatag = '</a>';
-                                       endif; ?>
-                                    <h3><?=$arItem['NAME'];?></h3><?=$endatag;?>
-                                    <?=$arItem['PREVIEW_TEXT'];?>
+                                            <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
+                                            <? } ?>
+                                            <?if ($arItem['PROPERTIES']['FORMS'] != '') {
+                                                $width = 300;
+                                                if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
+                                                    $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+
+                                                $height = 300;
+                                                if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
+                                                    $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
+
+                                                foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
+                                                    $file = CFile::ResizeImageGet(
+                                                        $photo,
+                                                        array('width' => $width, 'height' => $height),
+                                                        BX_RESIZE_PROPORTIONAL,
+                                                        true
+                                                    );?>
+                                                <div class="image respond">
+                                                    <?=CFile::ShowImage($file['src']);?>
+                                                    </div>
+                                                <? endforeach; ?>
+                                            <?}?>
+                                        <?=$p2;?>
+                                        <?=$p1;?>
+                                            <? if(!$text_right) {
+                                                echoBlockTitle($arItem);
+                                            }?>
+                                            <?=$arItem['PREVIEW_TEXT'];?>
+                                        <?=$p2;?>
+                                    <?=$a2;?>
                                 </div>
+                                <?if ($text_right) {
+                                    unset($text_right);
+                                    unset($a1); unset($a2);
+                                    unset($p1); unset($p2);
+                                } elseif ($text_left) {
+                                    unset($text_left);
+                                    unset($la1); unset($la2);
+                                    unset($lp1); unset($lp2);
+                                }
+                                ?>
                             </div>
                         </div>
                     <? endif; ?>
