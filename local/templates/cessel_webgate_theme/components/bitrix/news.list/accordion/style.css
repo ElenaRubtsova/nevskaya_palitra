@@ -1,0 +1,51 @@
+h2, .image {
+    text-align: center;
+    padding-bottom: 15px;
+}
+.card-body {
+    padding: 30px !important;
+    width: 300px !important;
+    height: 300px !important;
+}
+.card-body li {
+    color: #9a9a9a;
+}
+.card-body h2 {
+    text-align: center !important;
+    font-size: 36px !important;
+    padding-top: 30px !important;
+}
+.card-body .big {
+    text-align: center !important;
+    min-height: 1em !important;
+    padding: 30px 0px 20px 0px !important;
+}
+.card-body h3 {
+    text-align: center !important;
+    min-height: 1em !important;
+    line-height: 1.3;
+    padding: 20px 0px 20px 0px !important;
+}
+.col-12to12 {
+    width: 100% !important;
+}
+.pad {
+    padding-bottom: 30px !important;
+}
+.bot {
+    padding-bottom: 20px !important;
+}
+.badge-title {
+    text-align: left !important;
+    /*font-size: 18px !important;
+    line-height: 1.35;*/
+}
+/*.kad {
+    flex: 0 0 50% !important;
+}*/
+@media screen and (min-width: 992px) {
+    .kad {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+}

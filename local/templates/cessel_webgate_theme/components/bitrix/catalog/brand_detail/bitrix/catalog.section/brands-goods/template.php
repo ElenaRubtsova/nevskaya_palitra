@@ -31,7 +31,7 @@ use \Bitrix\Main\Localization\Loc;
         		$add_class = ($item['PREVIEW_PICTURE'] !== NULL && $item['PREVIEW_PICTURE']['SRC'] != '/bitrix/components/bitrix/catalog.section/templates/.default/images/no_photo.png') ? '' :' with-placeholder';
                 $is_new = $item['PROPERTY_SHOW_IN_TOP_VALUE'];
                 ?>
-                <div class="col-4to12 q0">
+                <div class="col-4to12 ">
                     <div class="card-wrapper scalabel-hover">
                         <div style="display: none"><?php print_r($item['PROPERTY_SHOW_IN_TOP_VALUE']);?></div>
                         <div class="card">
