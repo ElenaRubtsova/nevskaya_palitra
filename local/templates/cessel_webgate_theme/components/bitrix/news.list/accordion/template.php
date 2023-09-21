@@ -36,7 +36,7 @@ class Element {
 
     <? if ($blocks['Y'] !== ''): ?>
         <? foreach ($blocks['Y'] as $arItem) : ?>
-            <h1><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></h1>
+            <a href="#<?=$arItem['PROPERTIES']['TYPE']['VALUE'];?>"><h3><li><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></li></h3></a>
         <?endforeach;?>
     <?endif;?>
 
@@ -64,6 +64,7 @@ class Element {
         <? if ($blocks['Y'] !== ''): ?>
             <div style="padding-bottom: 30px"></div><?//print_r($blocks['Y']);?>
             <? foreach ($blocks['Y'] as $arItem) : ?>
+            <a name="<?=$arItem['PROPERTIES']['TYPE']['VALUE'];?>"></a>
                 <? if ($arItem !== ''): ?><?/*='<pre>';print_r($arItem);echo('</pre>');*/?>
                     <? $this->AddEditAction(
                         $arItem['ID'],
@@ -191,29 +192,37 @@ class Element {
                     <? if ($arItem !== '' /*&& $arItem['FORMS']['ACTIVE'] === 'Y'*/): ?>
                     <? $cl = 'col-4to12'; /*if ($arItem['PROPERTIES']['WIDTH']['VALUE'] != '') $cl = $arItem['PROPERTIES']['WIDTH']['VALUE'];*/?>
                         <div class="pad <?=$cl;?>">
-                            <? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+                            <?
+                            $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                             $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
 
+                            <? if ($arItem['PREVIEW_PICTURE'] != '') {
+                            $width = 300;
+                            /*if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
+                                $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];*/
+
+                            $height = 150;
+                            /*if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
+                                $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];*/
+
+                            $file = CFile::ResizeImageGet(
+                                $arItem['PREVIEW_PICTURE'],
+                                array('width' => $width, 'height' => $height),
+                                BX_RESIZE_PROPORTIONAL,
+                                true
+                            );?>
+
+                            <div id="p-click" onclick="show_popup($(this))"
+                               data-name="<?=$arItem["NAME"];?>"
+                               data-image="<?=$arItem['PREVIEW_PICTURE']['SRC'];?>"
+                               data-detail-text="<?=htmlspecialchars($arItem["PREVIEW_TEXT"]);?>"
+                               data-href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>"
+                            >
                             <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                                 <div class="card-body">
                                     <? $element = new Element($arItem);?>
                                     <?=$a1;?>
                                         <?=$p1;?>
-                                            <? if ($arItem['PREVIEW_PICTURE'] != '') {
-                                            $width = 300;
-                                            /*if ($arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
-                                                $width = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];*/
-
-                                            $height = 150;
-                                            /*if ($arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'] != '')
-                                                $height = (int)$arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];*/
-
-                                            $file = CFile::ResizeImageGet(
-                                                $arItem['PREVIEW_PICTURE'],
-                                                array('width' => $width, 'height' => $height),
-                                                BX_RESIZE_PROPORTIONAL,
-                                                true
-                                            );?>
                                             <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
                                             <? } ?>
                                             <?if ($arItem['PROPERTIES']['FORMS'] != '') {
@@ -239,11 +248,7 @@ class Element {
                                             <?}?>
                                         <?=$p2;?>
                                         <?=$p1;?>
-                                            <?if ($arItem['PROPERTIES']['CATALOG_REF']['VALUE'] !== '') {?>
-                                                <a href="<?=$arItem['PROPERTIES']['CATALOG_REF']['VALUE'];?>">
-                                                        <? $endatag = '</a>';
-                                                }?>
-                                                    <h3><?=$arItem['NAME'];?></h3><?=$endatag;?>
+                                                    <h3><?=$arItem['NAME'];?></h3>
                                             <?/*=$arItem['PREVIEW_TEXT'];*/?>
                                         <?=$p2;?>
                                     <?=$a2;?>
@@ -259,6 +264,7 @@ class Element {
                                 }
                                 ?>
                             </div>
+                            </div>
                         </div>
                     <? endif; ?>
                 <? endforeach; ?>
@@ -266,3 +272,23 @@ class Element {
         <? endif; ?>
     </div>
 <? endforeach; ?>
+
+
+<!--review-popup-->
+<div class="overlay" id="set_popup">
+    <div class="flex-popup">
+        <div class="popup">
+            <span class="close_popup" onclick="close_popup()">X</span>
+            <h2 id="p-title"></h2>
+            <div class="row">
+                <div class="col-6to12">
+                    <div class="image respond"><img id="p-photo"/></div>
+                </div>
+                <div class="col-6to12">
+                    <p id="p-description"></p>
+                    <a id="p-url"><button class="btn btn-wide bg-red centered">Catalogue</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

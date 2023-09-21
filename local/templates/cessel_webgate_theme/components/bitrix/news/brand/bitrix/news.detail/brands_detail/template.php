@@ -102,7 +102,7 @@ $icons_color[] = 'bg-green';
 										<div class="card-image">
 											<img class="loaded" src="<?=$path_feat;?>">
 										</div>
-										<div class="card-body">
+										<div class="fline card-body">
 											<h3><?echo $arResult["PROPERTIES"]["FEATURES"]["VALUE"][$i];?></h3>
 										</div>
 									</div>
@@ -149,6 +149,12 @@ $icons_color[] = 'bg-green';
 					<h2 style="text-align: center; font-size: 36px;"><?=GetMessage("PALETTE_TITLE")?></h2>
 					<?}?>
                 </div>
+                <?
+                //echo $_GET['type'];
+                //print_r($_GET);
+                if ($_GET['type'] != 'accordion') {
+                    $_GET['type'] = "dop-properties";
+                }?>
 
                 <!-- dop-properties -->
                 <? global $arrFilter;
@@ -158,7 +164,7 @@ $icons_color[] = 'bg-green';
                 ); ?>
                 <? $APPLICATION->IncludeComponent(
                     "bitrix:news.list",
-                    "dop-properties",
+                    $_GET['type'],
                     array(
                         "ACTIVE_DATE_FORMAT" => "d.m.Y",
                         "ADD_SECTIONS_CHAIN" => "Y",
@@ -235,7 +241,7 @@ $icons_color[] = 'bg-green';
             <div class="container">
                 <div class="section-inner">
                     <div id="reviews-list" class="reviews-list filter-result" data-available-count="<?=$arParams['COUNT_IN_LIST'];?>" data-max-count="<?=count($arResult["ITEMS"])?>">
-                        <div class="section-palettes">
+                        <div class="section-reviews">
                             <h2 style="margin-bottom: 50px; text-align: center; font-size: 36px;"><?=GetMessage("REVIEWS_TITLE")?></h2>
                         </div>
                         <div class="row">

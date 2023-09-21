@@ -222,7 +222,10 @@
     right: 0;
     top: 0;
 }
-
+@media (min-width: 1240px) {
+.fline h3 {
+	height: 120px !important;
+}}
 .features {
 	clear: both;
 	display: flex;
@@ -247,6 +250,9 @@
 /*--
 --- Отзывы - список (+ попап )
 --*/
+.section-reviews {
+	padding-top: 50px;
+}
 .page-main {}
 .page-section {}
 .section-bottom-reviews {
@@ -316,59 +322,4 @@ td {
 }
 .card-body li {
 	color: black !important;
-}
-
-/*--
---- Галерея изображений - слайдер (картинки)
---*/
-.about-slider-wrapper {
-	padding: 15px 0px;
-}
-.slider-item {
-	padding: 15px 0px;
-	text-align: center;
-}
-.slider-item img {
-	height: 100%;
-	width: 100%;
-	border-radius: 25px;
-	/*height: 800px;
-	width: 1200px;*/
-}
-/* Выцветание анимации */
-.fade {
-	-webkit-animation-name: fade;
-	-webkit-animation-duration: 1.5s;
-	animation-name: fade;
-	animation-duration: 1.5s;
-}
-@-webkit-keyframes fade {
-	from {opacity: .4}
-	to {opacity: 1}
-}
-@keyframes fade {
-	from {opacity: .4}
-	to {opacity: 1}
-}
-/* Точки/маркеры/указатели */
-.dot {
-	cursor: pointer;
-	height: 15px;
-	width: 15px;
-	margin: 0 2px;
-	background-color: #f2e5e3;
-	border-radius: 50%;
-	display: inline-block;
-	transition: background-color 0.6s ease;
-}
-.dot.active, .dot:hover {
-	background-color: #feb495;
-}
-.dots {
-	text-align: center;
-}
-@media screen and (max-width: 990px) {
-	.dot {
-		display: none;
-	}
 }

@@ -19,16 +19,38 @@ $this->setFrameMode(true);
         <? $i = 0; ?>
         <? foreach ($arResult["ITEMS"] as $file) { ?>
             <div class="slider-item fade respond">
-                <?=CFile::ShowImage(
-                        $file['src'],
-                        $arParams['PICTURE_WIDTH'],
-                        $arParams['PICTURE_HEIGHT'],
-                        "border=0",
-                        "",
-                        true
-                );?></div>
+                <div class=" image respond " >
+                    <div class="square_buddy neva-section-img" style="--img1: url(<?=$file['src'];?>);"></div>
+                    <img class="img-slider" src="<?=($file['src']);?>">
+                    <?/*=CFile::ShowImage(
+                            $file['src'],
+                            $arParams['PICTURE_WIDTH'],
+                            $arParams['PICTURE_HEIGHT'],
+                            "border=0",
+                            "",
+                            true
+                    );*/?>
+                </div>
+            </div>
             <? $i++;
         } ?>
     <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
             onclick="plusSlides(1)"></button>
 </div>
+
+<!--
+<div class="about-slider-wrapper" style="max-width: 100%;">
+    <button class="btn btn-small slider-btn bg-red with-arrow-left" data-dir="Prev"
+            onclick="plusSlides(-1)"></button>
+    <? $i = 0; ?>
+    <? foreach ($arResult["ITEMS"] as $file) { ?>
+        <div class="slider-item fade respond">
+                <div class="square_buddy neva-section-img" style="--img1: url(<?=($file['src']);?>);">
+                </div>
+            </div>
+        <? $i++;
+    } ?>
+    <button class="btn btn-small slider-btn bg-red with-arrow-right" data-dir="Next"
+            onclick="plusSlides(1)"></button>
+</div>
+-->
