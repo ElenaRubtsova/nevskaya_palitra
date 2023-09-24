@@ -5,13 +5,11 @@ h2, .image {
 .card-body {
     padding: 30px !important;
 }
-.card-body li {
-    color: #9a9a9a;
-}
-.card-body h2 {
-    text-align: center !important;
-    font-size: 36px !important;
-    padding-top: 30px !important;
+.title-block {
+    text-align: center;
+    font-size: 32px;
+    padding-top: 40px;
+    padding-bottom: 30px;
 }
 .card-body .big {
     text-align: center !important;
@@ -38,6 +36,27 @@ h2, .image {
     /*font-size: 18px !important;
     line-height: 1.35;*/
 }
+td {
+    padding: 5px;
+    padding-right: 10px;
+    vertical-align: top;
+}
+.card-body p { color: #303030 !important; min-height: 0em !important; }
+.desc p, li{
+    color: #303030 !important;
+    /*color: #9a9a9a;*/
+}
+.button_wrap {
+    padding-top: 30px ;
+    height: 100px; /*position: absolute; bottom: 30px; width: 100%*/;
+}
+.btn-text  {
+    z-index: 3;
+}
+.col-7to12 {
+    width: 66.667% !important;
+}
+
 /*.kad {
     flex: 0 0 50% !important;
 }*/
