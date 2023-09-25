@@ -29,6 +29,14 @@ class Element {
     public function echoImages() {
 
     }
+    public function echoButton() {
+        if (true) {?>
+            <!--<div style="padding-bottom: 100px;"></div>-->
+            <div class="button_wrap">
+                <button class="btn btn-wide bg-blue centered" <!--onclick="document.location='<?=$url;?>'"-->
+                    <div class="btn-text">Show</div></button></div>
+        <?}
+    }
 }
 ?>
 
@@ -222,6 +230,7 @@ class Element {
                                 <div class="card-body">
                                     <? $element = new Element($arItem);?>
                                     <?=$a1;?>
+                                    <h3><?=$arItem['NAME'];?></h3>
                                         <?=$p1;?>
                                             <div class="image respond"><?=CFile::ShowImage($file['src']);?></div>
                                             <? } ?>
@@ -247,10 +256,8 @@ class Element {
                                                 <? endforeach; ?>
                                             <?}?>
                                         <?=$p2;?>
-                                        <?=$p1;?>
-                                                    <h3><?=$arItem['NAME'];?></h3>
+                                            <?$element->echoButton();?>
                                             <?/*=$arItem['PREVIEW_TEXT'];*/?>
-                                        <?=$p2;?>
                                     <?=$a2;?>
                                 </div>
                                 <?if ($text_right) {
