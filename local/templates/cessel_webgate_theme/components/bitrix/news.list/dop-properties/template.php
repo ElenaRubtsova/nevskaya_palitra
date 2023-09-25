@@ -257,13 +257,13 @@ class Element {
                                     if (/*$arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_right' ||*/
                                     $arItem['PROPERTIES']['TYPE_VIEW_LIST']['VALUE_XML_ID'] == 'text-right') {
                                         $text_right = true;
-                                        $a1 = '<div class="row">'; $a2 = '</div>';
+                                        $a1 = '<div class="row desc">'; $a2 = '</div>';
                                         $p1 = '<div class="col-6to12">'; $p2 = '</div>';
                                         ?><?
                                     } elseif (/*$arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_left' ||*/
                                     $arItem['PROPERTIES']['TYPE_VIEW_LIST']['VALUE_XML_ID'] == 'text-left') {
                                         $text_left = true;
-                                        $a1 = '<div class="row">'; $a2 = '</div>';
+                                        $a1 = '<div class="row desc">'; $a2 = '</div>';
                                         $p1 = '<div class="col-6to12">'; $p2 = '</div>';
                                     } if ($text_left || $text_right)
                                         $isType = true;
