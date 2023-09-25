@@ -48,7 +48,7 @@ class Element {
         }
     }
 
-    public function echoFormsImages($width = 300, $height = 300) {
+    public function echoSetImages($width = 300, $height = 300) {
         if ($this->arItem['PROPERTIES']['FORMS'] != '') {
             if ($this->arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'] != '')
                 $width = (int)$this->arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
@@ -63,11 +63,41 @@ class Element {
                     BX_RESIZE_PROPORTIONAL,
                     true
                 );?>
-            <div class="image respond">
-                <?=CFile::ShowImage($file['src']);?>
+                <div class="image respond">
+                    <?=CFile::ShowImage($file['src']);?>
                 </div>
             <? endforeach;
         }
+    }
+
+    public function echoFormsImages($width = 1700, $height = 300) {
+        if ($this->arItem['PROPERTIES']['FORMS'] != '') {
+            if ($this->arItem['PROPERTIES']['PICTURE_FORMS_WIDTH']['VALUE'] != '')
+                $m_width = (int)$this->arItem['PROPERTIES']['PICTURE_ANONCE_WIDTH']['VALUE'];
+            else $m_width = 500;
+
+            if ($this->arItem['PROPERTIES']['PICTURE_FORMS_HEIGHT']['VALUE'] != '')
+                $m_height = (int)$this->arItem['PROPERTIES']['PICTURE_ANONCE_HEIGHT']['VALUE'];
+            else $m_height = 120;
+
+            foreach ($this->arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
+                $file = CFile::ResizeImageGet(
+                    $photo,
+                    array('width' => $width, 'height' => $height),
+                    BX_RESIZE_PROPORTIONAL,
+                    true
+                );?>
+            <div class="image respond">
+                <img src="<?=$file['src'];?>" style="max-height: <?=$m_height;?>px;">
+                </div>
+            <? endforeach;
+        }
+    }
+
+    public function echoDescription () {
+        ?><div class="desc"><?
+        echo $this->arItem['PREVIEW_TEXT'];
+        ?></div><?
     }
 
     public function echoButton_arrow ($url) {
@@ -121,7 +151,8 @@ class Element {
             <? foreach ($blocks['Y'] as $arItem) : ?>
             <h2 class="title-block" href="#<?=$arItem['PROPERTIES']['TYPE']['VALUE'];?>"><?=$arItem['PROPERTIES']['TYPE']['VALUE'];?></h2>
                 <? if ($arItem !== ''): ?><?/*='<pre>';print_r($arItem);echo('</pre>');*/?>
-                    <? $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+                    <? $element = new Element($arItem);
+                    $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                     $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM'))); ?>
 
                     <div class="card" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
@@ -129,23 +160,13 @@ class Element {
                             <div class="row">
                                 <div class="col-6to12">
                                 <div style="padding-bottom: 30px;"></div>
-                                <? $element = new Element($arItem);
-                                $element->echoPreviewImage(500,500);
-                                ?>
+                                <?$element->echoPreviewImage(500, 500);?>
                                 </div>
                                 <div class="col-6to12">
                                     <h3 class="big"><?=$arItem['NAME'];?></h3>
                                     <div class="desc"><?=$arItem['PREVIEW_TEXT'];?></div>
                                     <div class="image">
-                                        <? foreach ($arItem['PROPERTIES']['FORMS']['VALUE'] as $photo) :
-                                            $file = CFile::ResizeImageGet(
-                                                $photo,
-                                                array('width' => 1700, 'height' => 250),
-                                                BX_RESIZE_PROPORTIONAL,
-                                                true
-                                            );?>
-                                        <img width="340" src="<?=$file['src']?>">
-                                        <? endforeach; ?>
+                                        <?$element->echoFormsImages();?>
                                     </div>
                                 </div>
                             </div>
@@ -211,9 +232,9 @@ class Element {
                 <? foreach ($blocks['N'] as $arItem): ?><?/*echo('<pre>');print_r($arItem['ID']);echo('</pre>');*/?>
                     <? if ($arItem !== ''): ?>
                     <? $cl = 'col-3to12';
-                    if ($arItem['PROPERTIES']['WIDTH']['VALUE'] != '')
+                    /*if ($arItem['PROPERTIES']['WIDTH']['VALUE'] != '')
                         $cl = $arItem['PROPERTIES']['WIDTH']['VALUE'];
-                    elseif ($arItem['PROPERTIES']['WIDTH_LIST']['VALUE_XML_ID'] != '')
+                    else*/if ($arItem['PROPERTIES']['WIDTH_LIST']['VALUE_XML_ID'] != '')
                         $cl = $arItem['PROPERTIES']['WIDTH_LIST']['VALUE_XML_ID'];
                     ?>
 
@@ -233,13 +254,13 @@ class Element {
                                     //$element->echoButton_arrow($arItem['PROPERTIES']['CATALOG_REF']['VALUE']);
 
                                     //echo ('test');print_r($arItem['PROPERTIES']['TYPE_VIEW_LIST']['VALUE_XML_ID']);
-                                    if ($arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_right' ||
+                                    if (/*$arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_right' ||*/
                                     $arItem['PROPERTIES']['TYPE_VIEW_LIST']['VALUE_XML_ID'] == 'text-right') {
                                         $text_right = true;
                                         $a1 = '<div class="row">'; $a2 = '</div>';
                                         $p1 = '<div class="col-6to12">'; $p2 = '</div>';
                                         ?><?
-                                    } elseif ($arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_left' ||
+                                    } elseif (/*$arItem['PROPERTIES']['TYPE_VIEW']['VALUE'] === 'text_left' ||*/
                                     $arItem['PROPERTIES']['TYPE_VIEW_LIST']['VALUE_XML_ID'] == 'text-left') {
                                         $text_left = true;
                                         $a1 = '<div class="row">'; $a2 = '</div>';
@@ -254,10 +275,10 @@ class Element {
                                     <?=$a1;?>
                                         <?=$p1;?>
                                             <?if ($text_left) {?>
-                                                <?=$arItem['PREVIEW_TEXT'];?>
+                                                <?$element->echoDescription();?>
                                             <?} else {?>
                                                 <?$element->echoPreviewImage(300, 300);?>
-                                                <?$element->echoFormsImages(300, 300);?>
+                                                <?$element->echoSetImages(300, 300);?>
                                             <?}?>
                                         <?=$p2;?>
                                         <?=$p1;?>
@@ -266,9 +287,9 @@ class Element {
                                             }?>
                                             <?if ($text_left) {?>
                                                 <?$element->echoPreviewImage(300, 300);?>
-                                                <?$element->echoFormsImages(300, 300);?>
+                                                <?$element->echoSetImages(300, 300);?>
                                             <?} else {?>
-                                                <?=$arItem['PREVIEW_TEXT'];?>
+                                                <?$element->echoDescription();?>
                                             <?}?>
                                         <?=$p2;?>
                                     <?=$a2;?>
