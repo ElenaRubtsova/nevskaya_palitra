@@ -28,41 +28,36 @@ $APPLICATION->SetTitle("About company");
 					<div class="timeline-item-text">
 						 <? inc("about_history_1", "html"); ?>
 					</div>
-					<div class="timeline-item-icon bg-red">
- <img src="<? echo(SITE_TEMPLATE_PATH . '/images/icons/content_icons/manuf.svg');?>" alt="">
+					<div class="timeline-item-icon" style="background: url(<?=(SITE_TEMPLATE_PATH . '/images/icons/content_icons/1899-min.jpg');?>); background-size: 100%;">
 					</div>
 				</div>
 				<div class="timeline-item">
 					<div class="timeline-item-text">
 						 <? inc("about_history_2", "html"); ?>
 					</div>
-					<div class="timeline-item-icon bg-blue">
- <img src="<? echo(SITE_TEMPLATE_PATH . '/images/icons/content_icons/printer.svg');?>" alt="">
-					</div>
+                    <div class="timeline-item-icon" style="background: url(<?=(SITE_TEMPLATE_PATH . '/images/icons/content_icons/1930-min.jpg');?>); background-size: 100%;">
+                    </div>
 				</div>
 				<div class="timeline-item">
 					<div class="timeline-item-text">
 						 <? inc("about_history_3", "html"); ?>
 					</div>
-					<div class="timeline-item-icon bg-green">
- <img src="<? echo(SITE_TEMPLATE_PATH . '/images/icons/content_icons/paint_left.svg');?>" alt="">
-					</div>
+                    <div class="timeline-item-icon" style="background: url(<?=(SITE_TEMPLATE_PATH . '/images/icons/content_icons/1960-min.jpg');?>); background-size: 100%;">
+                    </div>
 				</div>
 				<div class="timeline-item">
 					<div class="timeline-item-text">
 						 <? inc("about_history_4", "html"); ?>
 					</div>
-					<div class="timeline-item-icon bg-orange">
- <img src="<?php echo(SITE_TEMPLATE_PATH . '/images/icons/content_icons/palette.svg');?>" alt="">
-					</div>
+                    <div class="timeline-item-icon" style="background: url(<?=(SITE_TEMPLATE_PATH . '/images/icons/content_icons/2000-min.jpg');?>); background-size: 100%;">
+                    </div>
 				</div>
 				<div class="timeline-item">
 					<div class="timeline-item-text">
 						 <? inc("about_history_5", "html"); ?>
 					</div>
-					<div class="timeline-item-icon bg-red">
- <img src="<?php echo(SITE_TEMPLATE_PATH . '/images/icons/content_icons/brush.svg');?>" alt="">
-					</div>
+                    <div class="timeline-item-icon" style="background: url(<?=(SITE_TEMPLATE_PATH . '/images/icons/content_icons/infinit-min.jpg');?>); background-size: 100%;">
+                    </div>
 				</div>
 			</div>
 		</div>

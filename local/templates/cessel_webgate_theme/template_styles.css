@@ -1,0 +1,180 @@
+.select-lang.expanded .select-lang-options{
+	padding: 6px 12px;
+}
+
+
+@media (max-width: 640px){
+	.header-actions{
+		display: block;
+	}
+
+	.header-actions .header-search{
+		display: none;
+	}
+
+	.header-actions .select-lang{
+		margin-right: 10px;
+		max-width: 70px;
+	}
+
+}
+
+
+
+.intro-section{
+	padding-top: 0px;
+}
+
+
+
+
+/*happy-new-year START*/
+
+.happy-new-year-logo{
+	display: none;
+}
+
+.happy-new-year{
+	background-image: url(/local/templates/cessel_webgate_theme/images/new-year/new-year-line.gif);
+    background-position: top;
+    background-repeat: repeat no-repeat;
+}
+
+
+.happy-new-year .header-inner{
+	padding-top: 20px;
+}
+
+
+.happy-new-year .header-logo{
+	position: relative!important;
+}
+
+.happy-new-year .happy-new-year-logo{
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: -24px;
+    height: 50px;
+    min-height: 50px;
+    width: 50px;
+    min-width: 50px;
+    background-repeat: no-repeat;
+    background-image: url(/local/templates/cessel_webgate_theme/images/new-year/hat.png);
+    background-position: center;
+    background-size: contain;
+}
+
+
+.happy-new-year .intro-section{
+    background-repeat: no-repeat;
+    background-image: url(/local/templates/cessel_webgate_theme/images/new-year/HNY.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.happy-new-year .intro-section-slogan{
+	color: #CEA839;
+	font-size: 52px;
+	margin-bottom: 2em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.respond > img, .respond > a img{
+	max-width: 100%;
+	height: auto;
+	width: auto\9;
+}
+
+@media (min-width: 1580px){
+	.happy-new-year .happy-new-year-logo{
+		 left: -15px;
+	}
+}
+
+@media (max-width: 690px){
+	.happy-new-year .intro-section-slogan{
+		font-size: 22px;
+		margin-top: 35px;
+	}
+}
+
+/*happy-new-year END*/
+.intro-section {
+	padding-top: 0px;
+	min-height: auto;
+}
+.main_logo_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 6vh;
+	position: relative;
+}
+/***Catalog***/
+.catalog2022_utp{
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+
+.catalog2022_utp_title{
+	text-align: center;
+	font-size: 42px;
+	line-height: 42px;
+	margin-bottom: 42px;
+	font-weight: 600;
+}
+
+.catalog2022_utp_tiles{
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0px, 1fr));
+	gap: 30px;
+}
+
+.catalog2022_utp_tile{
+	
+}
+
+.catalog2022_utp_tile_image_wrapper{
+	margin-bottom: 16px;
+}
+
+.catalog2022_utp_tile_image{
+	max-width: 100%;
+	border-radius: 12px;
+}
+
+.catalog2022_utp_tile_title{
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.catalog2022_utp_tile_paragraf{
+	
+}
+
+
+@media (max-width: 600px){
+	.catalog2022_utp_tiles {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0px, 1fr));
+		gap: 20px;
+	}
+	
+	.catalog2022_utp{
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	
+	.catalog2022_utp_title{
+		font-size: 32px;
+		line-height: 32px;
+		margin-bottom: 32px;
+	}
+}
