@@ -208,7 +208,6 @@ $APPLICATION->SetTitle("About company");
     "custom:popup",
     "about_the_company",
     array(
-        "DATA" => "TEST",
     ),
     false
 );?>

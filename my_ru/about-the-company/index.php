@@ -63,7 +63,13 @@ $APPLICATION->SetTitle("О компании");
 		</div>
 	</div>
 </div>
- </section> <section class="page-section">
+ </section> <?$APPLICATION->IncludeComponent(
+    "custom:popup",
+    "about_the_company",
+    array(),
+    false
+);?>
+    <section class="page-section">
 <!---div class="container">
 	<div class="section-inner">
 		<div class="row">
